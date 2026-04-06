@@ -1,0 +1,1266 @@
+<!DOCTYPE html> <html lang=zh-cn style=--olcb-folder-code-block-max-height:80vh;--cnb-code-bg:rgb(245,245,245);--cnb-code-font-size:12px;--cnb-code-color:rgb(68,68,68)><!--
+ Page saved with SingleFile 
+ url: https://www.cnblogs.com/zhyjava/articles/18784642 
+ saved date: Fri Apr 03 2026 21:33:04 GMT+0800 (中国标准时间)
+--><meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<meta name=description content="Java Web开发技术解析：从基础到实践的全栈指南 在互联网技术演进中，Java Web凭借其跨平台特性、成熟的生态系统和强大的企业级服务能力，成为构建动态Web应用的核心技术栈。本文从技术组成、开发工具、实战应用三个维度，全面解析Java Web的完整技术体系，并结合最新行业实践探讨其演进方向。">
+<meta property=og:description content="Java Web开发技术解析：从基础到实践的全栈指南 在互联网技术演进中，Java Web凭借其跨平台特性、成熟的生态系统和强大的企业级服务能力，成为构建动态Web应用的核心技术栈。本文从技术组成、开发工具、实战应用三个维度，全面解析Java Web的完整技术体系，并结合最新行业实践探讨其演进方向。">
+<meta property=og:image content=https://assets.cnblogs.com/images/wechat-share.jpg>
+<meta http-equiv=Cache-Control content=no-transform>
+<meta http-equiv=Cache-Control content=no-siteapp>
+<meta http-equiv=X-UA-Compatible content="IE=edge">
+<title>Java Web开发技术解析：从基础到实践的全栈指南 - 以恒1 - 博客园</title>
+<link rel=canonical href=https://www.cnblogs.com/zhyjava/articles/18784642>
+<style>:root{--sf-img-0: url("data:image/gif;base64,R0lGODlhEgAkAOYAAP////7///7+//7+/v///vz8/Pn9//v7+/j8//f8//r8//j7//f39/D5//D4/+/4//b29u73/+/3/+72//Pz8/Ly8uXy/+Xz/+Ty/+Py/+3t7ezs7Njt/9ft/9bs/ufn5+bm5szo/+Pj48zn/8vn/sPk/8Pj/8Lj//ymAaKioqGhoaCgoJ2dnZubm5qampeXl5OTk/aFAJKSkmeYypGRkWWXymeXymaXypCQkGWWyo6Ojo2NjWaTxmaNwWeNwWaHumaHuWeHumaGumWFuWaAs2Z/s2Z/smd5q2Z4q2dzpmZypWVxpGZsn2Vrnug3AP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAUUAE8ALAAAAAASACQAAAf5gE+Cg4SFhoeIiYqLiACOj5CHACoplZaWjoQDKQMqAAOgoSoqA5orBQWnB6sHK60AmiwMs7K0tKWDAy0VvC4uFC0tFMCwuS8aGsfJyMcvuIIDMB/SH9XWMDDF0Dg4It7f3zTP0Ds65ufnmYWh7KGM7/Dx8vP09faNkPmSNTU3/v/+9AWwEaAGgAAIE+bIQcBJDBSOeChQwMOARYs8EvB4ROBJgB4OQvpoQNKHBAk9CDyEFUAIhpdDhlj48ePCBSGRAhjhwIEIzyIdOhjpUKThSgBIRiQdwbQpEiQcnwhYsuSE1atXlaiECK0Jk69gwUYaJKCs2bP37gUCADs=");--sf-img-4: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTAgMGgyNHYyNEgwVjB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTguNzEgMTEuNzFsMi41OSAyLjU5Yy4zOS4zOSAxLjAyLjM5IDEuNDEgMGwyLjU5LTIuNTljLjYzLS42My4xOC0xLjcxLS43MS0xLjcxSDkuNDFjLS44OSAwLTEuMzMgMS4wOC0uNyAxLjcxeiIvPjwvc3ZnPg==");--sf-img-8: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTAgMGgyNHYyNEgwVjB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTExLjcxIDE1LjI5bDIuNTktMi41OWMuMzktLjM5LjM5LTEuMDIgMC0xLjQxTDExLjcxIDguN2MtLjYzLS42Mi0xLjcxLS4xOC0xLjcxLjcxdjUuMTdjMCAuOSAxLjA4IDEuMzQgMS43MS43MXoiLz48L3N2Zz4=");--sf-img-6: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xIC0xIDE4IDE4Ij48cGF0aCBmaWxsPSIjZmZmIiBkPSJtMS42MTMuMjEuMDk0LjA4M0w4IDYuNTg1IDE0LjI5My4yOTNsLjA5NC0uMDgzYTEgMSAwIDAgMSAxLjQwMyAxLjQwM2wtLjA4My4wOTRMOS40MTUgOGw2LjI5MiA2LjI5M2ExIDEgMCAwIDEtMS4zMiAxLjQ5N2wtLjA5NC0uMDgzTDggOS40MTVsLTYuMjkzIDYuMjkyLS4wOTQuMDgzQTEgMSAwIDAgMSAuMjEgMTQuMzg3bC4wODMtLjA5NEw2LjU4NSA4IC4yOTMgMS43MDdBMSAxIDAgMCAxIDEuNjEzLjIxeiIvPjwvc3ZnPg==");--sf-img-11: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDI0IDI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiPjxnPjxyZWN0IGZpbGw9Im5vbmUiIGhlaWdodD0iMjQiIHdpZHRoPSIyNCIvPjwvZz48Zz48cGF0aCBkPSJNMTQsNHY1YzAsMS4xMiwwLjM3LDIuMTYsMSwzSDljMC42NS0wLjg2LDEtMS45LDEtM1Y0SDE0IE0xNywySDdDNi40NSwyLDYsMi40NSw2LDNjMCwwLjU1LDAuNDUsMSwxLDFjMCwwLDAsMCwwLDBsMSwwdjUgYzAsMS42Ni0xLjM0LDMtMywzdjJoNS45N3Y3bDEsMWwxLTF2LTdIMTl2LTJjMCwwLDAsMCwwLDBjLTEuNjYsMC0zLTEuMzQtMy0zVjRsMSwwYzAsMCwwLDAsMCwwYzAuNTUsMCwxLTAuNDUsMS0xIEMxOCwyLjQ1LDE3LjU1LDIsMTcsMkwxNywyeiIvPjwvZz48L3N2Zz4=");--sf-img-12: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTAgMGgyNHYyNEgwVjB6IiBmaWxsPSJub25lIi8+PHBhdGggZD0iTTQgMTAuNWMtLjgzIDAtMS41LjY3LTEuNSAxLjVzLjY3IDEuNSAxLjUgMS41IDEuNS0uNjcgMS41LTEuNS0uNjctMS41LTEuNS0xLjV6bTAtNmMtLjgzIDAtMS41LjY3LTEuNSAxLjVTMy4xNyA3LjUgNCA3LjUgNS41IDYuODMgNS41IDYgNC44MyA0LjUgNCA0LjV6bTAgMTJjLS44MyAwLTEuNS42OC0xLjUgMS41cy42OCAxLjUgMS41IDEuNSAxLjUtLjY4IDEuNS0xLjUtLjY3LTEuNS0xLjUtMS41ek04IDE5aDEyYy41NSAwIDEtLjQ1IDEtMXMtLjQ1LTEtMS0xSDhjLS41NSAwLTEgLjQ1LTEgMXMuNDUgMSAxIDF6bTAtNmgxMmMuNTUgMCAxLS40NSAxLTFzLS40NS0xLTEtMUg4Yy0uNTUgMC0xIC40NS0xIDFzLjQ1IDEgMSAxek03IDZjMCAuNTUuNDUgMSAxIDFoMTJjLjU1IDAgMS0uNDUgMS0xcy0uNDUtMS0xLTFIOGMtLjU1IDAtMSAuNDUtMSAxeiIvPjwvc3ZnPg==");--sf-img-10: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgICAgc3R5bGU9Im1hcmdpbjogYXV0bzsgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7IGRpc3BsYXk6IGJsb2NrOyBzaGFwZS1yZW5kZXJpbmc6IGF1dG87IgogICAgIHZpZXdCb3g9IjAgMCAxMDAgMTAwIgogICAgIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj4KICAgIDxnIHRyYW5zZm9ybT0icm90YXRlKDAgNTAgNTApIj4KICAgICAgICA8cmVjdCB4PSI0NyIKICAgICAgICAgICAgICB5PSI0IgogICAgICAgICAgICAgIHJ4PSIzIgogICAgICAgICAgICAgIHJ5PSI0LjIiCiAgICAgICAgICAgICAgd2lkdGg9IjYiCiAgICAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICAgICBmaWxsPSIjMmU2YWIxIj4KICAgICAgICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIKICAgICAgICAgICAgICAgICAgICAgdmFsdWVzPSIxOzAiCiAgICAgICAgICAgICAgICAgICAgIGtleVRpbWVzPSIwOzEiCiAgICAgICAgICAgICAgICAgICAgIGR1cj0iMXMiCiAgICAgICAgICAgICAgICAgICAgIGJlZ2luPSItMC45MTY2NjY2NjY2NjY2NjY2cyIKICAgICAgICAgICAgICAgICAgICAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiPjwvYW5pbWF0ZT4KICAgICAgICA8L3JlY3Q+CiAgICA8L2c+CiAgICA8ZyB0cmFuc2Zvcm09InJvdGF0ZSgzMCA1MCA1MCkiPgogICAgICAgIDxyZWN0IHg9IjQ3IgogICAgICAgICAgICAgIHk9IjQiCiAgICAgICAgICAgICAgcng9IjMiCiAgICAgICAgICAgICAgcnk9IjQuMiIKICAgICAgICAgICAgICB3aWR0aD0iNiIKICAgICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgICAgIGZpbGw9IiMyZTZhYjEiPgogICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IgogICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjE7MCIKICAgICAgICAgICAgICAgICAgICAga2V5VGltZXM9IjA7MSIKICAgICAgICAgICAgICAgICAgICAgZHVyPSIxcyIKICAgICAgICAgICAgICAgICAgICAgYmVnaW49Ii0wLjgzMzMzMzMzMzMzMzMzMzRzIgogICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSI+PC9hbmltYXRlPgogICAgICAgIDwvcmVjdD4KICAgIDwvZz4KICAgIDxnIHRyYW5zZm9ybT0icm90YXRlKDYwIDUwIDUwKSI+CiAgICAgICAgPHJlY3QgeD0iNDciCiAgICAgICAgICAgICAgeT0iNCIKICAgICAgICAgICAgICByeD0iMyIKICAgICAgICAgICAgICByeT0iNC4yIgogICAgICAgICAgICAgIHdpZHRoPSI2IgogICAgICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgICAgZmlsbD0iIzJlNmFiMSI+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiCiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTswIgogICAgICAgICAgICAgICAgICAgICBrZXlUaW1lcz0iMDsxIgogICAgICAgICAgICAgICAgICAgICBkdXI9IjFzIgogICAgICAgICAgICAgICAgICAgICBiZWdpbj0iLTAuNzVzIgogICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSI+PC9hbmltYXRlPgogICAgICAgIDwvcmVjdD4KICAgIDwvZz4KICAgIDxnIHRyYW5zZm9ybT0icm90YXRlKDkwIDUwIDUwKSI+CiAgICAgICAgPHJlY3QgeD0iNDciCiAgICAgICAgICAgICAgeT0iNCIKICAgICAgICAgICAgICByeD0iMyIKICAgICAgICAgICAgICByeT0iNC4yIgogICAgICAgICAgICAgIHdpZHRoPSI2IgogICAgICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgICAgZmlsbD0iIzJlNmFiMSI+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiCiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTswIgogICAgICAgICAgICAgICAgICAgICBrZXlUaW1lcz0iMDsxIgogICAgICAgICAgICAgICAgICAgICBkdXI9IjFzIgogICAgICAgICAgICAgICAgICAgICBiZWdpbj0iLTAuNjY2NjY2NjY2NjY2NjY2NnMiCiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgICAgICAgPC9yZWN0PgogICAgPC9nPgogICAgPGcgdHJhbnNmb3JtPSJyb3RhdGUoMTIwIDUwIDUwKSI+CiAgICAgICAgPHJlY3QgeD0iNDciCiAgICAgICAgICAgICAgeT0iNCIKICAgICAgICAgICAgICByeD0iMyIKICAgICAgICAgICAgICByeT0iNC4yIgogICAgICAgICAgICAgIHdpZHRoPSI2IgogICAgICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgICAgZmlsbD0iIzJlNmFiMSI+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiCiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTswIgogICAgICAgICAgICAgICAgICAgICBrZXlUaW1lcz0iMDsxIgogICAgICAgICAgICAgICAgICAgICBkdXI9IjFzIgogICAgICAgICAgICAgICAgICAgICBiZWdpbj0iLTAuNTgzMzMzMzMzMzMzMzMzNHMiCiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgICAgICAgPC9yZWN0PgogICAgPC9nPgogICAgPGcgdHJhbnNmb3JtPSJyb3RhdGUoMTUwIDUwIDUwKSI+CiAgICAgICAgPHJlY3QgeD0iNDciCiAgICAgICAgICAgICAgeT0iNCIKICAgICAgICAgICAgICByeD0iMyIKICAgICAgICAgICAgICByeT0iNC4yIgogICAgICAgICAgICAgIHdpZHRoPSI2IgogICAgICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgICAgZmlsbD0iIzJlNmFiMSI+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiCiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTswIgogICAgICAgICAgICAgICAgICAgICBrZXlUaW1lcz0iMDsxIgogICAgICAgICAgICAgICAgICAgICBkdXI9IjFzIgogICAgICAgICAgICAgICAgICAgICBiZWdpbj0iLTAuNXMiCiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgICAgICAgPC9yZWN0PgogICAgPC9nPgogICAgPGcgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIDUwIDUwKSI+CiAgICAgICAgPHJlY3QgeD0iNDciCiAgICAgICAgICAgICAgeT0iNCIKICAgICAgICAgICAgICByeD0iMyIKICAgICAgICAgICAgICByeT0iNC4yIgogICAgICAgICAgICAgIHdpZHRoPSI2IgogICAgICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgICAgZmlsbD0iIzJlNmFiMSI+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiCiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTswIgogICAgICAgICAgICAgICAgICAgICBrZXlUaW1lcz0iMDsxIgogICAgICAgICAgICAgICAgICAgICBkdXI9IjFzIgogICAgICAgICAgICAgICAgICAgICBiZWdpbj0iLTAuNDE2NjY2NjY2NjY2NjY2N3MiCiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgICAgICAgPC9yZWN0PgogICAgPC9nPgogICAgPGcgdHJhbnNmb3JtPSJyb3RhdGUoMjEwIDUwIDUwKSI+CiAgICAgICAgPHJlY3QgeD0iNDciCiAgICAgICAgICAgICAgeT0iNCIKICAgICAgICAgICAgICByeD0iMyIKICAgICAgICAgICAgICByeT0iNC4yIgogICAgICAgICAgICAgIHdpZHRoPSI2IgogICAgICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgICAgZmlsbD0iIzJlNmFiMSI+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiCiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTswIgogICAgICAgICAgICAgICAgICAgICBrZXlUaW1lcz0iMDsxIgogICAgICAgICAgICAgICAgICAgICBkdXI9IjFzIgogICAgICAgICAgICAgICAgICAgICBiZWdpbj0iLTAuMzMzMzMzMzMzMzMzMzMzM3MiCiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgICAgICAgPC9yZWN0PgogICAgPC9nPgogICAgPGcgdHJhbnNmb3JtPSJyb3RhdGUoMjQwIDUwIDUwKSI+CiAgICAgICAgPHJlY3QgeD0iNDciCiAgICAgICAgICAgICAgeT0iNCIKICAgICAgICAgICAgICByeD0iMyIKICAgICAgICAgICAgICByeT0iNC4yIgogICAgICAgICAgICAgIHdpZHRoPSI2IgogICAgICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgICAgZmlsbD0iIzJlNmFiMSI+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiCiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTswIgogICAgICAgICAgICAgICAgICAgICBrZXlUaW1lcz0iMDsxIgogICAgICAgICAgICAgICAgICAgICBkdXI9IjFzIgogICAgICAgICAgICAgICAgICAgICBiZWdpbj0iLTAuMjVzIgogICAgICAgICAgICAgICAgICAgICByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSI+PC9hbmltYXRlPgogICAgICAgIDwvcmVjdD4KICAgIDwvZz4KICAgIDxnIHRyYW5zZm9ybT0icm90YXRlKDI3MCA1MCA1MCkiPgogICAgICAgIDxyZWN0IHg9IjQ3IgogICAgICAgICAgICAgIHk9IjQiCiAgICAgICAgICAgICAgcng9IjMiCiAgICAgICAgICAgICAgcnk9IjQuMiIKICAgICAgICAgICAgICB3aWR0aD0iNiIKICAgICAgICAgICAgICBoZWlnaHQ9IjEyIgogICAgICAgICAgICAgIGZpbGw9IiMyZTZhYjEiPgogICAgICAgICAgICA8YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJvcGFjaXR5IgogICAgICAgICAgICAgICAgICAgICB2YWx1ZXM9IjE7MCIKICAgICAgICAgICAgICAgICAgICAga2V5VGltZXM9IjA7MSIKICAgICAgICAgICAgICAgICAgICAgZHVyPSIxcyIKICAgICAgICAgICAgICAgICAgICAgYmVnaW49Ii0wLjE2NjY2NjY2NjY2NjY2NjY2cyIKICAgICAgICAgICAgICAgICAgICAgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiPjwvYW5pbWF0ZT4KICAgICAgICA8L3JlY3Q+CiAgICA8L2c+CiAgICA8ZyB0cmFuc2Zvcm09InJvdGF0ZSgzMDAgNTAgNTApIj4KICAgICAgICA8cmVjdCB4PSI0NyIKICAgICAgICAgICAgICB5PSI0IgogICAgICAgICAgICAgIHJ4PSIzIgogICAgICAgICAgICAgIHJ5PSI0LjIiCiAgICAgICAgICAgICAgd2lkdGg9IjYiCiAgICAgICAgICAgICAgaGVpZ2h0PSIxMiIKICAgICAgICAgICAgICBmaWxsPSIjMmU2YWIxIj4KICAgICAgICAgICAgPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIKICAgICAgICAgICAgICAgICAgICAgdmFsdWVzPSIxOzAiCiAgICAgICAgICAgICAgICAgICAgIGtleVRpbWVzPSIwOzEiCiAgICAgICAgICAgICAgICAgICAgIGR1cj0iMXMiCiAgICAgICAgICAgICAgICAgICAgIGJlZ2luPSItMC4wODMzMzMzMzMzMzMzMzMzM3MiCiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgICAgICAgPC9yZWN0PgogICAgPC9nPgogICAgPGcgdHJhbnNmb3JtPSJyb3RhdGUoMzMwIDUwIDUwKSI+CiAgICAgICAgPHJlY3QgeD0iNDciCiAgICAgICAgICAgICAgeT0iNCIKICAgICAgICAgICAgICByeD0iMyIKICAgICAgICAgICAgICByeT0iNC4yIgogICAgICAgICAgICAgIHdpZHRoPSI2IgogICAgICAgICAgICAgIGhlaWdodD0iMTIiCiAgICAgICAgICAgICAgZmlsbD0iIzJlNmFiMSI+CiAgICAgICAgICAgIDxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9Im9wYWNpdHkiCiAgICAgICAgICAgICAgICAgICAgIHZhbHVlcz0iMTswIgogICAgICAgICAgICAgICAgICAgICBrZXlUaW1lcz0iMDsxIgogICAgICAgICAgICAgICAgICAgICBkdXI9IjFzIgogICAgICAgICAgICAgICAgICAgICBiZWdpbj0iMHMiCiAgICAgICAgICAgICAgICAgICAgIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIj48L2FuaW1hdGU+CiAgICAgICAgPC9yZWN0PgogICAgPC9nPgogICAgPCEtLSBbbGRpb10gZ2VuZXJhdGVkIGJ5IGh0dHBzOi8vbG9hZGluZy5pby8gLS0+Cjwvc3ZnPgo=");--sf-img-7: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTM2Ny45MjEgMjIzLjgwN2MxMi42NjYgMCAyNC42ODggNS4wNDcgMzMuODUxIDE0LjIxIDkuMTY0IDkuMTY0IDE0LjIxIDIxLjE4NiAxNC4yMSAzMy44NTFsMCAxNi4wMDljMCAzNS4zNDYgMjguNjU0IDY0IDY0IDY0bDMzNi4xODUgMGMxMi42NjUgMCAyNC42ODggNS4wNDcgMzMuODUyIDE0LjIxIDkuMTYzIDkuMTY0IDE0LjIxIDIxLjE4NiAxNC4yMSAzMy44NTFsMCAzNTIuMTkzYzAgMTIuNjY2LTUuMDQ3IDI0LjY4OC0xNC4yMSAzMy44NTItOS4xNjQgOS4xNjMtMjEuMTg2IDE0LjIxLTMzLjg1MiAxNC4yMUwyMDcuODMzIDgwMC4xOTNjLTEyLjY2NiAwLTI0LjY4OC01LjA0Ny0zMy44NTEtMTQuMjEtOS4xNjQtOS4xNjQtMTQuMjEtMjEuMTg3LTE0LjIxLTMzLjg1MkwxNTkuNzcyIDI3MS44NjhjMC0xMi42NjYgNS4wNDctMjQuNjg4IDE0LjIxLTMzLjg1MXMyMS4xODYtMTQuMjEgMzMuODUxLTE0LjIxTDM2Ny45MjEgMjIzLjgwN00zNjcuOTIxIDE1OS44MDcgMjA3LjgzMyAxNTkuODA3Yy02MS41MzQgMC0xMTIuMDYyIDUwLjUyOC0xMTIuMDYyIDExMi4wNjJsMCA0ODAuMjY0YzAgNjEuNTM0IDUwLjUyOCAxMTIuMDYyIDExMi4wNjIgMTEyLjA2Mmw2MDguMzM0IDBjNjEuNTM0IDAgMTEyLjA2Mi01MC41MjcgMTEyLjA2Mi0xMTIuMDYyTDkyOC4yMjkgMzk5LjkzOGMwLTYxLjUzNC01MC41MjctMTEyLjA2Mi0xMTIuMDYyLTExMi4wNjJMNDc5Ljk4MiAyODcuODc2bDAtMTYuMDA5QzQ3OS45ODIgMjEwLjMzNCA0MjkuNDU1IDE1OS44MDcgMzY3LjkyMSAxNTkuODA3TDM2Ny45MjEgMTU5LjgwN3oiIC8+PC9zdmc+");--sf-img-9: url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAyNCAxMDI0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0iY3VycmVudENvbG9yIiBkPSJNNTMuNzYxMDU3IDM4Mi45NDg5MjVoMjkuMDEzMTlWMTUyLjkyNTk2M2MwLTE5LjExNjg3IDE2Ljg0Njc0MS0zNC43OTA2NDcgMzcuOTk5OTE3LTM0Ljc5MDY0N2gyODUuODc2ODUzYzEyLjE5MDg1OSAwIDIyLjc4MDkzNiA0LjQ3NDczNSAyOS44MTQ4NjUgMTIuOTIwNTg5bDEzMi4zNDk2MzQgMTMwLjc5MzgxOWgzMzQuNjkxNjc3YzIxLjE1MzE3NiAwIDM4LjUyNTM3NCAxNS4xOTIwMDIgMzguNTI1Mzc1IDM0LjgxNjM0MXY4Ni4yODI4NmgyOC43MzgyNTZjMjAuODc2OTU4IDAgMzcuOTc1NTA3IDE2LjEzMzcxMyAzNy45NzU1MDcgMzQuODE2MzQydjUuOTQ0NDczTDk0Ny4xNjUwODcgODcxLjAzODA2NGMtMS4zMjcxMzIgMTAuNDQyMzMzLTcuODYxMjk5IDE5LjM5OTUxMS0xNy4wNzI4NTUgMjQuODU0NWEzOS45Mzg1ODQgMzkuOTM4NTg0IDAgMCAxLTI2LjU4NTAzOSA5Ljk2MDU1N0gxMjAuNzc0MTY0YTQwLjg2MjMwOSA0MC44NjIzMDkgMCAwIDEtMjYuNTg1MDM5LTkuNzA3NDY0Yy05LjIzNzI1MS01Ljk0NDQ3My0xNi4yNzExOC0xNS42NTE5MzctMTcuMzQzOTM0LTI2LjU5NDAzMkwxNS41MTA2MTYgNDIyLjQ2NzRjLTIuMTUzMjE3LTE5LjM2ODY3OCAxMi41MTcxODEtMzYuNzg3MTI3IDMzLjM5NDEzOS0zOS4wMzY2OTlsNC44NTYzMDItMC40ODE3NzZ6IG0xMDUuMjM5MTM3IDBoNzA2LjUzMTQ5MnYtNTEuNDc1NTExSDU1Mi41NDU2MjFjLTEwLjU2NDM4MyAwLTIwLjYwMjAyNC0zLjQ4ODA1OC0yOC4xODcxMDQtMTAuOTIwMjU1TDM5MC4zNzk4MzggMTg3Ljc2Mjg2MWgtMjMxLjM4MDkyOHYxOTUuMTg2MDY0eiBtNzY4LjM4ODk1NCA3MC4zNjI0MTRIOTYuODkyMjA5bDUyLjA2OTA1OSAzNzguMTkwMjY0aDcyNi44ODQyNzhsNTEuNTQzNjAyLTM3OC4xODUxMjV6IiAvPjwvc3ZnPg==")}</style><style>.navbar a:link,.navbar a:active,.navbar a:visited{color:#666;text-decoration:none}.navbar a:hover{color:#666;text-decoration:underline}@media screen and (min-width:769px){.dropdown:hover .dropdown-menu.quick-search-menu{max-height:0}.dropdown:hover .dropdown-menu,.dropdown:focus-within .dropdown-menu.quick-search-menu{max-height:1000px;z-index:1000}.dropdown:focus-within .focus-hidden{display:none}.dropdown:focus-within .focus-visible{display:block}}.dropdown>.dropdown-menu{display:block}.navbar{display:flex;flex-direction:column;align-items:center;background-color:#fff;padding-left:40px;padding-right:40px;padding-top:5px;padding-bottom:5px}.navbar>nav{display:flex;color:#666;flex-direction:row;flex-wrap:nowrap;align-items:center;justify-content:space-between;width:100%}.navbar>nav .navbar-branding{width:80px;margin-right:5px}.navbar>nav .navbar-branding img{display:block;margin-left:10px}.navbar>nav .navbar-left>*:not(:first-child){margin-left:24px}@media screen and (min-width:768px) and (max-width:1023px){.navbar>nav .navbar-left>*:not(:first-child){margin-left:16px}}.navbar>nav .navbar-right>*:not(:first-child),.navbar>nav #navbar_login_status>*:not(:first-child){margin-left:16px}.navbar>nav #navbar_login_status{min-width:120px}.navbar>nav .navbar-list{display:flex;flex-direction:row;align-items:center;flex-wrap:nowrap;list-style:none;white-space:nowrap;transition:width .5s ease}.navbar>nav .navbar-list>*{flex-shrink:0}.navbar>nav .navbar-search{padding-left:20px;padding-right:20px;display:flex;flex-direction:row;align-items:center;border-radius:6px;background-color:#f4f4f4;height:32px}.navbar>nav .navbar-search:focus-within{border-bottom-left-radius:0;border-bottom-right-radius:0}.navbar>nav .navbar-search img{width:16px;height:16px}.navbar>nav .navbar-search>input{border:none;outline:none;background:none;width:160px;font-size:inherit}@media (min-width:768px) and (max-width:1023px){.navbar>nav .navbar-search>input{width:100px}}.navbar>nav .navbar-search>button{background:none;border:none;cursor:pointer}.navbar>nav .navbar-search>input::-webkit-input-placeholder{color:#afafaf;opacity:1}.navbar>nav .navbar-search>input::-moz-placeholder{color:#afafaf;opacity:1}.navbar>nav .navbar-search>input:-ms-input-placeholder{color:#afafaf;opacity:1}.navbar>nav .navbar-search>input::-ms-input-placeholder{color:#afafaf;opacity:1}.navbar>nav .navbar-search>input::placeholder{color:#afafaf;opacity:1}.navbar>nav .navbar-icon-wrapper{position:relative}.navbar-right .dropdown-menu{right:0}.dropdown{position:relative}@media screen and (min-width:769px){.dropdown:hover .dropdown-menu,.dropdown:focus-within .dropdown-menu,.dropdown:active .dropdown-menu{max-height:1000px;z-index:1000}}.dropdown>.dropdown-menu.quick-search-menu{left:0;padding-left:0;padding-right:0;border-top-left-radius:0;border-top-right-radius:0}.dropdown>.dropdown-menu.quick-search-menu>*{display:flex;align-items:center;justify-content:space-between}.dropdown>.dropdown-menu.quick-search-menu .search-area{font-size:12px;padding:2px 4px;border-radius:5px;border-style:solid;border-width:1px;border-color:#ccc}.dropdown>.dropdown-menu.quick-search-menu .keyword-wrapper{display:flex;align-items:center;min-width:0}.dropdown>.dropdown-menu.quick-search-menu .keyword-wrapper img{width:1em;height:1em}.dropdown>.dropdown-menu.quick-search-menu .keyword{min-width:1px;flex-grow:1;overflow-x:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 10px}.dropdown>.dropdown-menu.quick-search-menu>*:first-child{margin-top:0}.dropdown>.dropdown-menu.quick-search-menu>*:not(:first-child){margin-top:0}.dropdown>.dropdown-menu.quick-search-menu>*:last-child{margin-bottom:0;padding-bottom:10px}.dropdown>.dropdown-menu.quick-search-menu>*{margin-bottom:0;padding:5px 10px}.quick-search-menu>*:hover{background-color:rgba(0,0,0,.01);cursor:pointer}.quick-search-menu>.active{background-color:rgba(0,0,0,.05)}.dropdown>.dropdown-menu{-webkit-transition:all .5s ease,max-height .5s ease;-o-transition:all .5s ease,max-height .5s ease;transition:all .5s ease,max-height .5s ease;max-height:0;overflow:hidden;position:absolute;top:100%;border-radius:5px;min-width:5em;-webkit-box-shadow:2px 2px 13px 0 rgba(212,212,212,.5);box-shadow:2px 2px 13px 0 rgba(212,212,212,.5);background-color:#f9f9f9}.syntaxhighlighter.collapsed .toolbar a:hover{color:#f00!important}.syntaxhighlighter .toolbar a:hover{color:#000!important}body{font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue","Helvetica","Arial",sans-serif;tab-size:4}input[type="button"]{-webkit-appearance:button}img{max-width:100%}#blog_post_info_block{margin-top:20px}#EntryTag{margin-top:0!important}.post-meta-disclaimer{font-size:min(2vw,13px,100%);filter:opacity(.6)}.sendMsg2This:link,.sendMsg2This:visited,.sendMsg2This:active{font-size:12px;text-decoration:none;background:var(--sf-img-0) no-repeat top left;padding-left:20px}.sendMsg2This:hover{background:var(--sf-img-0) no-repeat bottom left}.cnblogs-markdown :not(pre,div)>code{font-family:ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace,sans-serif;font-size:12px;padding:0 5px;line-height:1.8;margin:0 3px;display:inline-block;overflow-x:auto;vertical-align:middle;border-radius:3px;color:#c0341d;background-color:rgba(0,0,0,.04);border:none!important}pre,pre code,.hljs-engine pre,.hljs-engine pre code{transition-duration:.2s;transition-property:background,font-size,border-color,border-radius,border-width,padding,margin,color}.cnblogs-markdown pre code,.blogpost-body pre code{line-height:1.5;margin:0}pre{overflow:auto}.cnblogs_code_toolbar a:hover,.cnblogs_code_toolbar a:link,.cnblogs_code_toolbar a:visited,.cnblogs_code_toolbar a:active,.cnblogs_code_toolbar a:link img,.cnblogs_code_toolbar a:visited img{background-color:#f5f5f5!important;border:none!important}.div_my_zzk{margin-top:5px;margin-bottom:5px;display:flex;align-items:center}.input_my_zzk{vertical-align:middle;height:24px;border-radius:5px;border-width:1px;width:100%}input.btn_my_zzk{vertical-align:middle;height:26px;font-size:12px;padding-left:5px;padding-right:5px;cursor:pointer}pre{margin-top:0;margin-bottom:0}.dp-highlighter a:hover{background:none;border:none;padding:0;margin:0}.dp-highlighter .tools a:hover{color:#f00;background-color:inherit;text-decoration:underline}#author_profile{float:left;width:280px;margin-top:0;margin-bottom:10px;color:#000;margin-left:0;font-size:12px}#author_profile a:link,#author_profile a:visited,#author_profile a:acitve{text-decoration:none}#author_profile a:hover{text-decoration:underline}.author_avatar{vertical-align:top;float:left;margin-right:5px;padding-top:5px;padding-left:2px;border:0;width:48px;height:48px}.author_profile_info{float:left;line-height:18px}a.profile-icon-link:link,a.profile-icon-link:active,a.profile-icon-link:hover,a.profile-icon-link:visited{text-decoration:none!important;border:none!important}#div_digg{float:right;margin-bottom:10px;margin-right:30px;font-size:12px;width:125px;text-align:center;margin-top:10px}.diggit{float:left;width:46px;height:52px;background:url(data:image/gif;base64,R0lGODlhLgA0AMQAAP/00P/22vfqt/b29v/11f/45P/56P/34PjtwfXlqf/55v/11//00v/44vnwyfn5+f/22Pbnrf/21vny0Pn00//33vDw8P/12KioqP/10ufm61B1uv/33f/33P////H4+iH5BAAAAAAALAAAAAAuADQAAAX/oJeMZGmeaJqKQOu+cCzPcxLJmZvlcM4DPlosE4kwMsfdLrlEIo8MZvRJjTKbxaZyy+16v94iYUwum8/odDlDjgjU8Lh8LBAs7mQ8YTHmS/aAfHyBeHeCg3l1dxAQFwsXkBeMjJILEJaNko2bk4+Pl4x3knUBpaanqKmqq6sCCAEdsR2ws6mytbSwprGns766HQgIHByxxR3FxMi3y8nIycTO0MqywtTH0Mu30s/PytLRt9bYxt3Hstzf4eDUsePlzc7bzebr8e3Bw+Tx2uj06t/unct3rVzAeeC8pQtXTR+8bAP/1Qs4beA7bRCZLVT4j6E7hxjNaezIkZ1FkOQO//pLGG0hvosp5a3k17LjSwQVcurcybOnz58/ETg4QLSo0aNIkypV6sBBg6dPC0CdWkBqg6pTs1q1qpWrgwlVw4odS7as2bMTJihYy7at27dw48adQMGA3bt48+rdy5cv3b6AAwu2S8EDhcOIEytezLhxYw+QI0ueTLmy5cuYM2veDPmD58+gQ4seTbq0htIPBqguzbq159OjH2jQgEHDANe4RcMWPUCDBwsYHuQe/pr0bA8PMNwmnnt36N6/lYve8Jk69enVdYdO3ds38OWgr4sPv6G8+fOfndPGwB5DdPAf0J8vjz2+ds8eMFigPEB/aOvjVTfffOl91t96+0X2HYB58REYHmu7JWfZgp7RZ9+FDw4I2m79teebgrVVeGGAD5ZYoGcSVjbBBvCJ52CDDb4Y4Xq1SQYcBSWSaN91Ioa222+0WSDkkBiwmGOPJmJ4ooHsbVDkkw4I6CJ62cV4H2gPFHDABVsWAB9zEIIppnFjlrnhbGimqeaabLbp5mwhAAA7)no-repeat;text-align:center;cursor:pointer;margin-top:2px;padding-top:5px}.diggnum{font-size:14px;font-family:Verdana}.buryit{float:right;margin-left:20px;width:46px;height:52px;background:url(data:image/gif;base64,R0lGODlhLgA0AMQAAP////39/fn5+fj4+Pb29vX19fPz8/Ly8vHx8fDw8O/v7+7u7u3t7ezs7Ovr6+rq6ujo6Ofn5+bm5uXl5ePj4+Li4uHh4dzc3NfX19HR0c/Pz6qqqqioqKenp4WFhYODgyH5BAQUAP8ALAAAAAAuADQAAAX/IKCNZGmeaJqKUeu+cCzP80jfeN5mGeT/wKBwSCTyisik0sd7OJ/QqHRKpWYw1ax268RgHGDuFkwuO6Res3rNbre9jbh8Tq/b73fMpcHo+xl2f3iDdRcXC4iJiol/jY2LkIh/hpGQjpcMlYuTh5qMmI+ekn6UogugoaKcpqeofqyrpq6vsqSdqrOZtX2luLOwtsC/uwy9nrm6vsW3x7nCy6zR0ogXFgrX2Nna29zd3RYWCeLj5OXm5+jo4Ajs7e7v8PHy8hQUB/f4+fr7/P399QYCChxIsKDBgwcBIlzIsKGBCQAmSJxIsaLFixgxAtjIsaPHjyBDihxJsqTJjQVS8KpcybKly5cwIcCcSbOmSpk2c+pMiZOlAHYOFDhAQGBnzp4rN2z4wIEp0wpGayIFkOABB3MdPBh4+aHrB5pfb64UYJUDBwgdFXCYsNJr2LZu265EKoBDSAoftqp8O5MvX6QFzJpFyzHBWbhuu+5NmVgxz7EcAoA0XHQxS78FMItdedZsgo4HOFRmnNmy3NKoH6sEwAHBxwEcFlxOzZc06b8sIwg2S5WD3tNfa5cOG3xuSwEECPjoPdq2c8uaVb9ES3l25uKmoxcAPBdt3ebB/Tpu6dV4TAChBUSVClOADw4Smq93yX1scvnzWy7Zzz9ICAA7)no-repeat;text-align:center;cursor:pointer;margin-top:2px;padding-top:5px}.burynum{font-size:14px;font-family:Verdana}.diggword{margin-top:5px;margin-left:0;font-size:12px;color:#808080}a.digg_gray:link{color:#808080;text-decoration:underline}a.digg_gray:visited{color:#808080;text-decoration:underline}a.digg_gray:hover{color:#f00;text-decoration:underline}a.digg_gray:active{color:#808080;text-decoration:underline}#div_digg a.tip:link,#div_digg a.tip:visited,#div_digg a.tip:hover,#div_digg a.tip:active{color:#075db3;text-decoration:none;border-bottom:none}#div_digg a.tip:hover,#div_digg a.tip:active{text-decoration:underline}a.site_hot:visited,a.site_hot:active,a.site_hot:link{color:#f00;text-decoration:none}a.site_hot:hover{color:#f00;text-decoration:underline}#profile_block{margin-top:10px;line-height:1.5;text-align:left}.comment-sort-item:active,.comment-sort-item:hover{opacity:.85}#post_next_prev{line-height:1.8;font-size:12px}#post_next_prev a.p_n_p_prefix:link{text-decoration:none}#post_next_prev a.p_n_p_prefix:hover{text-decoration:underline}a.ing_lnk:link,a.ing_lnk:active,a.ing_lnk:visited{color:#808080;text-decoration:none;border:0}#green_channel{padding:10px 0;margin-bottom:20px;margin-top:10px;border:#c0c0c0 1px dashed;font-size:12px;width:350px;text-align:center}#green_channel a{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAkCAYAAABIdFAMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHhJREFUeNo8zjsOxCAMBFB/KEAUFFR0Cbng3nQPw68ArZdAlOZppPFIBhH5EAB8b+Tlt9MYQ6i1BuqFaq1CKSVcxZ2Acs6406KUgpt5/LCKuVgz5BDCSb13ZO99ZOdcZGvt4mJjzMVKqcha68iIePB86GAiOv8CDADlIUQBs7MD3wAAAABJRU5ErkJggg%3D%3D)repeat-x;display:inline-block;padding:3px 8px;color:#fff;text-decoration:none;font-weight:bold;cursor:pointer;margin-right:10px;-moz-border-radius:5px;-webkit-border-radius:10px;-moz-box-shadow:0 1px 3px rgba(0,0,0,.5);-webkit-box-shadow:0 1px 3px rgba(0,0,0,.5);text-shadow:0-1px 1px rgba(0,0,0,.25);vertical-align:middle}#green_channel a:hover{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAyCAYAAACd+7GKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAClJREFUeNpi/v//vwMTAwPDfzjBgMpFI/7hFSOT9Y8qRuF3JLoHAQIMAHYtMmRA+CugAAAAAElFTkSuQmCC)}#green_channel #green_channel_digg{background-color:#2daebf}#green_channel #green_channel_follow{background-color:#e33100}#green_channel #green_channel_favorite{background-color:#ffb515}#green_channel #green_channel_wechat{background-color:#4eab57}#cnblogs_post_body{margin-bottom:20px}#cnblogs_post_body li{list-style:inherit}#cnblogs_post_body ul{margin-left:2.5rem;padding-left:0;list-style-type:disc}#cnblogs_post_body ol{margin-left:2.5rem;padding-left:0;list-style-type:decimal}#cnblogs_post_body ul ul{list-style-type:circle}#cnblogs_post_body table,.blogpost-body table{border-collapse:collapse;word-break:break-word}#cnblogs_post_body .table-wrapper{display:block;overflow-x:auto}#cnblogs_post_body th,.blogpost-body th{background-color:#fafafa}.blogpost-body th,.blogpost-body td,.blogpost-body th,.blogpost-body td{border:1px solid #c0c0c0;border-collapse:collapse;padding:8px 14px;min-width:50px}.ad_text_commentbox{margin-top:5px;margin-bottom:5px}#cnblogs_ch{margin-top:5px;line-height:1.8}#opt_under_post{line-height:1.8}.below-post-card,.under-post-card{margin-top:10px}.below-post-card,.under-post-card,#HistoryToday{max-width:600px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}.below-post-card{line-height:1.8;margin-bottom:10px}.below-post-card header{font-weight:bold;margin:0;padding:0}.below-post-card ul{margin:0;padding-left:10px}.below-post-card ul li{list-style-type:"· "}input::-moz-focus-inner{border:0;padding:0}.entrylistTitle a.category-crumb-item:visited{color:inherit}#cnblogs_post_body{word-break:break-word}#cnblogs_post_body>pre,#cnblogs_post_body p,.blogpost-body>pre,.blogpost-body p{margin:10px auto}#cnblogs_post_body p,.blogpost-body p{text-indent:0}#cnblogs_post_body h2{font-size:21px;font-weight:bold;line-height:1.5;margin:10px 0}#cnblogs_post_body h3{font-size:16px;font-weight:bold;line-height:1.5;margin:10px 0}#cnblogs_post_body h4{font-size:14px;font-weight:bold;margin:10px 0}#cnblogs_post_body hr{border-top:#ececef;border-color:rgba(0,0,0,.15);margin:5px 0}#div_digg .diggnum{line-height:1.5em!important}#div_digg .burynum{line-height:1.5em!important}#green_channel a:link,#green_channel a:visited,#green_channel a:active{color:#fff!important;border:none!important}#blog-news{overflow:hidden}.mermaid{white-space:pre-wrap}.mermaid>svg{display:block;margin:0 auto}.dropdown-menu a:visited,.dropdown-menu a:active{text-decoration:none}.dropdown-menu a:hover{text-decoration:underline}#blog_c1{width:300px;height:250px}.sidebar-card-title-a,a.sidebar-card-title-a:link,a.sidebar-card-title-a:visited{font-style:inherit!important;font-weight:inherit!important;font-size:inherit!important;color:inherit!important}a.footer-brand:link,a.footer-brand:visited{color:inherit}.footer-icp{line-height:30px}.footer-icp img{vertical-align:middle;margin:0 5px;width:18px;height:18px}.footer-icp a:link,.footer-icp a:visited{color:inherit;margin-right:10px}.cnb-code-toolbar:hover{--cnb-code-toolbar-opacity:1}[has-selection] .cnb-code-toolbar:hover{opacity:0;display:none;transition-duration:0s}@keyframes fadeIn{0%{opacity:0}100%{opacity:var(--cnb-code-toolbar-initial-opacity)}}pre:fullscreen,pre:fullscreen code{box-sizing:border-box;border-radius:0;height:100vh;width:100vw}.commentbox_tab:hover{border-bottom:2px solid #367cc2;color:#000}textarea#tbCommentBody::-webkit-input-placeholder{color:#a9a9a9}textarea#tbCommentBody::-moz-placeholder{color:#a9a9a9}textarea#tbCommentBody:-ms-input-placeholder{color:#a9a9a9}textarea#tbCommentBody::-ms-input-placeholder{color:#a9a9a9}textarea#tbCommentBody::placeholder{color:#a9a9a9}.login_tips{background-image:url(data:image/gif;base64,R0lGODlhEAAQAOZbAOny/v3+/lqIuT1wIOLu/lOMKKnB2omqzbTJ34+8Z9vq/c7c6tfo/ZSwhJOx0WyVwJGugWCJSbLSlff5/Pv8/efu9Y26ZDdrGUFzJXCYwuDt/vP3+uvx94usztrk793s/m6XwYe5YN/s/qO92Iu6YnCWXpeyiOnv9tXm/bHTkKa9mZ241dDj/dzm8Ex7Mejx/lePLd3r/vn7/NHk/eXw/tDk/dPm/dTm/dzq/d7s/tbn/WaOT3ugx2+XwuTv/o+7arbUnNnp/dDmurHFq9zr/X2iyF+Mu+bw/pm21Obx/oe6YFyKuvD2/oWny7HWktrp/Yy8ZYKjk+Pv/uHu/r7Q4z9xItHk/LTUlYGrYViHuP///////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAFsALAAAAAAQABAAAAemgFuCg4SFhoeGGw5LWY2OWU0VhB0GFFqXmFoIGRSCEwIBTABJPlM5CjhaPC2CHA9aL0dSGh8KDChaBwutrzQEGjFPDDczubtbnwEAIkRBOjY1VlpFHoOUAZgELACaGTKDigKNK5dDJTsRKog9FVFYV0I/MBCGI0hGESlOWlAJA4UnQFDZ4gIIJgkXEG2pQkKJlhD+FJooYEGChQL0FDbAcAFDgy2BAAA7);background-repeat:no-repeat;margin-top:10px;padding:0 0 10px 25px;font-weight:400}.login_tips a{text-decoration:underline!important}.clear{clear:both}.comment_option:hover{fill:#000;color:#000}.comment_svg_stroke:hover{stroke:#000}.comment_svg:hover{fill:#000}#comment_nav{text-align:right;display:flex;align-items:center;width:100%}.comment-nav-right{margin-left:auto}#comment_nav a{padding-left:10px}:root{--highlighted-line-bg:#d1e3c9;--highlighted-line-bg-dark:#264b33}pre.hljs-lines-highlighted ::after,pre.hljs-lines-highlighted ::before{box-sizing:border-box}pre.hljs-lines-highlighted code.hljs[data-lines-highlight] table.hljs-ln tr:before,pre.hljs-lines-highlighted code[data-lines-highlight] table.hljs-ln tr:before{content:" ";position:absolute}pre.hljs-lines-highlighted code.hljs[data-lines-highlight] table.hljs-ln tr:after,pre.hljs-lines-highlighted code[data-lines-highlight] table.hljs-ln tr:after{margin-right:calc(-1*var(--spacing-right));content:" ";display:block}pre.hljs-lines-highlighted code.hljs[data-lines-highlight] table.hljs-ln tr.highlighted-line:before,pre.hljs-lines-highlighted code[data-lines-highlight] table.hljs-ln tr.highlighted-line:before{position:absolute;content:"+";background:#d1e3c9;background:#d1e3c9;background:var(--highlighted-line-bg);left:4px;display:inline-block;z-index:1}pre.hljs-lines-highlighted code.hljs[data-lines-highlight] table.hljs-ln tr.highlighted-line:after,pre.hljs-lines-highlighted code[data-lines-highlight] table.hljs-ln tr.highlighted-line:after{background:#d1e3c9;background:#d1e3c9;background:var(--highlighted-line-bg)}pre.hljs-lines-highlighted code.hljs[data-lines-highlight]:not(.hljs-line-numbers) span.hljs-lines-highlight-wrapper span.highlighted-line:before,pre.hljs-lines-highlighted code[data-lines-highlight]:not(.hljs-line-numbers) span.hljs-lines-highlight-wrapper span.highlighted-line:before{content:"+";position:absolute;left:calc(-1*var(--spacing-left));width:var(--spacing-left);background:#d1e3c9;background:#d1e3c9;background:var(--highlighted-line-bg);top:0;bottom:0;padding-left:calc((var(--spacing-left) - .5px)/3)}pre.hljs-lines-highlighted code.hljs[data-lines-highlight]:not(.hljs-line-numbers) span.hljs-lines-highlight-wrapper span.highlighted-line:after,pre.hljs-lines-highlighted code[data-lines-highlight]:not(.hljs-line-numbers) span.hljs-lines-highlight-wrapper span.highlighted-line:after{content:"";position:absolute;left:calc(-1*var(--spacing-left));width:var(--spacing-left);background:#d1e3c9;background:#d1e3c9;background:var(--highlighted-line-bg);top:0;bottom:0;padding-left:0;right:calc(-1*var(--spacing-right));left:initial}pre.prismjs-lines-highlighted ::after,pre.prismjs-lines-highlighted ::before{box-sizing:border-box}pre.prismjs-lines-highlighted code.highlighter-prismjs[data-lines-highlight] span.highlighted-line:after,pre.prismjs-lines-highlighted code.highlighter-prismjs[data-lines-highlight] span.highlighted-line:before{background:#d1e3c9;background:#d1e3c9;background:var(--highlighted-line-bg);content:" ";position:absolute;display:inline-block}pre.prismjs-lines-highlighted code.highlighter-prismjs[data-lines-highlight] span.highlighted-line:before{content:"+";left:calc(-1*var(--spacing-left));width:var(--spacing-left);padding-left:4px}pre.prismjs-lines-highlighted code.highlighter-prismjs[data-lines-highlight] span.highlighted-line:after{position:absolute;right:calc(-1*var(--spacing-right));width:var(--spacing-right)}pre[data-mac-style][class*="language-"].highlighter-prismjs::before,pre[data-mac-style] code.hljs::before{content:"";position:absolute;top:10px;top:10px;top:var(--mac-style-spacing,10px);left:10px;left:10px;left:var(--mac-style-spacing,10px);width:12px;height:12px;background:#fe5f59;background:#fe5f59;background:var(--mac-style-color-red,#fe5f59);border-radius:50%;box-shadow:20px 0#febb2c,40px 0#29c73f;box-shadow:20px 0#febb2c,40px 0#29c73f;box-shadow:20px 0 var(--mac-style-color-orange,#febb2c),40px 0 var(--mac-style-color-green,#29c73f)}.mathjax2 .day .postTitle2 span span.MathJax::after,.mathjax2 .day .postTitle2 span span.MathJax_Preview::after,.mathjax2 .day .postTitle2 span span.MathJax span::after,.mathjax2 .day .postTitle2 span span.MathJax_Preview span::after{display:none}:root{--cnblogs-current-collection-bg-color:rgba(245,245,245,.98);--cnblogs-current-collection-highlight-color:rgba(255,255,255,.9);--cnblogs-current-collection-hover-color:rgba(255,255,255,.7);--cnblogs-current-collection-active-color:rgba(255,255,255,.8);--cnblogs-current-collection-color:#000}#cnblogs_post_body .current-collection a:link,#cnblogs_post_body .current-collection a:visited,#cnblogs_post_body .current-collection a:hover,#cnblogs_post_body .current-collection a:active{text-decoration:none}.current-collection-links .current-collection-link:link,.current-collection-links .current-collection-link:visited,.current-collection-links .current-collection-link:hover,.current-collection-links .current-collection-link:active{text-decoration:none}.clickable:hover{background:rgba(255,255,255,.7);background:rgba(255,255,255,.7);background:var(--cnblogs-current-collection-hover-color)}.clickable:active{background:rgba(255,255,255,.8);background:rgba(255,255,255,.8);background:var(--cnblogs-current-collection-active-color)}.icon-arrow::before{display:block;content:"";background:var(--sf-img-4);width:100%;height:100%}.icon-pin::before{display:block;content:"";background:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgLTk2MCA5NjAgOTYwIj48cGF0aCBkPSJtNjM0LTQ0OCA4NiA3N3Y2MEg1MTB2MjQxbC0zMCAzMC0zMC0zMHYtMjQxSDI0MHYtNjBsODAtNzd2LTMzM2gtNTB2LTYwaDQxNHY2MGgtNTB2MzMzWiIvPjwvc3ZnPg==);width:.9em;height:.9em}@keyframes collapse{from{max-height:80vh;max-height:80vh;max-height:var(--olcb-folder-code-block-scroll-height,80vh)}to{max-height:80vh;max-height:80vh;max-height:var(--olcb-folder-code-block-max-height,80vh)}}@keyframes expand{from{max-height:80vh;max-height:80vh;max-height:var(--olcb-folder-code-block-max-height,80vh);overflow-y:hidden}to{max-height:"";max-height:"";max-height:var(--olcb-folder-code-block-scroll-height,"");overflow-y:hidden}}.cnb-over-length-code-block-expanded .cnb-over-length-code-block-toggler:hover{opacity:1}.tree-categories-container[data-useCloseIcon=true]:before{content:"";-webkit-mask:var(--sf-img-6);mask:var(--sf-img-6);width:20px;height:20px;position:absolute;top:5px;right:5px}.tree-categories-item-title-left:before{content:"";background:currentColor;-webkit-mask-image:var(--sf-img-7);mask-image:var(--sf-img-7);display:inline-block;width:14px;height:14px}.tree-categories-item-toggler-arrow:before{-webkit-mask-image:var(--sf-img-8);mask-image:var(--sf-img-8);content:"";display:inline-block;width:20px;height:20px;background:currentColor}.tree-categories-item[data-expanded=true]>.tree-categories-item-container .tree-categories-item-title-left:before{-webkit-mask-image:var(--sf-img-9);mask-image:var(--sf-img-9)}.tree-categories-item[data-loading] .tree-categories-item-toggler-arrow:before{-webkit-mask-image:var(--sf-img-10);mask-image:var(--sf-img-10);width:16px;height:16px}span.entry-list-title-dropdown-prompt:before{background:currentColor;display:inline-block;-webkit-mask:var(--sf-img-7);mask:var(--sf-img-7);content:"";width:14px;height:14px;position:absolute;top:50%;transform:translateY(-50%)}.entrylistTitle[aria-expanded=true] span.entry-list-title-dropdown-prompt:before,.category-block-title[aria-expanded=true] span.entry-list-title-dropdown-prompt:before{-webkit-mask:var(--sf-img-9);mask:var(--sf-img-9)}:root{--cnblogs-charm-bar-bg-color:rgba(34,34,34,.8);--cnblogs-charm-bar-bg-color-darker:#222;--cnblogs-charm-bar-highlight-color:rgba(255,255,255,.98);--cnblogs-charm-bar-hover-color:rgba(34,34,34,.6);--cnblogs-charm-bar-active-color:rgba(34,34,34,.9);--cnblogs-charm-bar-color:#000}.charm-bar-handle:active,.charm-bar-handle:hover{background:#222;background:#222;background:var(--cnblogs-charm-bar-bg-color-darker)}.charm-bar-wrapper .charm-bar .charm-bar-item:hover{background:rgba(34,34,34,.6);background:rgba(34,34,34,.6);background:var(--cnblogs-charm-bar-hover-color)}.charm-bar-wrapper .charm-bar .charm-bar-item:active{background-color:#222;background-color:#222;background-color:var(--cnblogs-charm-bar-bg-color-darker)}@keyframes modal-open{0%{height:0;opacity:0}95%{height:505px}100%{height:auto;opacity:1}}:root{--cnblogs-toc-bg-color:rgba(245,245,245,.98);--cnblogs-toc-highlight-color:rgba(255,255,255,.9);--cnblogs-toc-color:#000}*:hover>.cnblogs-toc-button:not(.disabled){display:inline}.cnblogs-toc-pinned-button::before{content:"";background-color:currentColor;-webkit-mask-image:var(--sf-img-11);mask-image:var(--sf-img-11);width:1em;height:1em;display:block;margin:auto;max-width:100%}body{min-height:100vh}.cnblogs-toc-button:active{display:inline;opacity:100%}.cnblogs-toc-button{font-size:inherit;color:inherit;opacity:50%;outline:none;-moz-appearance:none;-webkit-appearance:none;appearance:none;background:transparent;border:0;cursor:pointer;-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;user-select:none;padding:0;margin-left:.5rem;text-transform:none;text-decoration:none;vertical-align:middle}.cnblogs-toc-button:hover{opacity:80%}.cnblogs-toc-button::before{content:"";background-color:currentColor;-webkit-mask-image:var(--sf-img-12);mask-image:var(--sf-img-12);width:1em;height:1em;display:block;margin:auto;max-width:100%}.cnblogs-toc-item .cnblogs-toc-collapse-button::before{content:"";background:currentColor;-webkit-mask-image:var(--sf-img-4);mask-image:var(--sf-img-4);width:20px;height:20px;display:block;margin:auto;max-width:100%}.cnblogs-toc-item.cnblogs-toc-collapsed .cnblogs-toc-collapse-button::before{-webkit-mask-image:var(--sf-img-8);mask-image:var(--sf-img-8)}.cnblogs-toc-pinned-button:hover,.cnblogs-toc-item:not(.cnblogs-toc-text):hover{background-color:var(--cnblogs-toc-highlight-color);cursor:pointer}@keyframes wb-fade-in{0%{opacity:0}to{opacity:.85}}.winbox.modal:before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:inherit;border-radius:inherit}.winbox.modal:after{content:"";position:absolute;top:-100vh;left:-100vw;right:-100vw;bottom:-100vh;background:#0d1117;animation:wb-fade-in .2s ease-out forwards;z-index:-1}pre code.hljs{display:block;overflow-x:auto;padding:1em}.hljs{color:#444}.hljs-number,.hljs-string,.hljs-type{color:#800}.hljs-operator,.hljs-variable{color:#ab5656}.dropdown-menu{z-index:1000;padding:0;float:left;margin:2px 0 0;list-style:none;text-shadow:none}.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus{color:#fff;text-decoration:none;outline:0;background-color:#4078c0;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc',endColorstr='#ff0077b3',GradientType=0)}/*!
+ * ui-dialog.css
+ * Date: 2014-07-03
+ * https://github.com/aui/artDialog
+ * (c) 2009-2014 TangBin, http://www.planeArt.cn
+ *
+ * This is licensed under the GNU LGPL, version 2.1 or later.
+ * For details, see: http://www.gnu.org/licenses/lgpl-2.1.html
+ */.ui-dialog-close:hover,.ui-dialog-close:focus{color:#000;text-decoration:none;cursor:pointer;outline:0;opacity:.5;filter:alpha(opacity=50)}.ui-dialog-statusbar label:hover{color:#333}.ui-dialog-footer button:focus{outline:thin dotted #333;outline:5px auto -webkit-focus-ring-color;outline-offset:-2px}.ui-dialog-footer button:hover,.ui-dialog-footer button:focus{color:#333;text-decoration:none}.ui-dialog-footer button:active{background-image:none;outline:0;-webkit-box-shadow:inset 0 3px 5px rgba(0,0,0,.125);box-shadow:inset 0 3px 5px rgba(0,0,0,.125)}.ui-dialog-footer button:hover,.ui-dialog-footer button:focus,.ui-dialog-footer button:active{color:#333;background-color:#ebebeb;border-color:#adadad}.ui-dialog-footer button:active{background-image:none}.ui-dialog-footer button[disabled]:hover,.ui-dialog-footer button[disabled]:focus,.ui-dialog-footer button[disabled]:active{background-color:#fff;border-color:#ccc}.ui-dialog-footer button.ui-dialog-autofocus:hover,.ui-dialog-footer button.ui-dialog-autofocus:focus,.ui-dialog-footer button.ui-dialog-autofocus:active{color:#fff;background-color:#3276b1;border-color:#285e8e}.ui-dialog-footer button.ui-dialog-autofocus:active{background-image:none}@-webkit-keyframes ui-dialog-loading{0%{-webkit-transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg)}}@keyframes ui-dialog-loading{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}.ui-dialog-loading::after{position:absolute;content:"";width:3px;height:3px;margin:14.5px 0 0 14.5px;border-radius:100%;box-shadow:0-10px 0 1px #ccc,10px 0#ccc,0 10px #ccc,-10px 0#ccc,-7px -7px 0 .5px #ccc,7px -7px 0 1.5px #ccc,7px 7px #ccc,-7px 7px #ccc;-webkit-transform:rotate(360deg);-webkit-animation:ui-dialog-loading 1.5s infinite linear;transform:rotate(360deg);animation:ui-dialog-loading 1.5s infinite linear;display:none\9}</style>
+<style>*{margin:0;padding:0}body{color:#000;background:#fff;font-size:13px;line-height:1.5}img{border:0}li{list-style:none}input{border:1px solid #999}h1,h2,h3,h4,th{font-weight:bold;color:#000}a{text-decoration:none;color:#000}a:hover{color:#f00}.navbar{padding:3px 15px 3px 10px;border-bottom:1px solid #f2f2f2}.navbar>nav .navbar-branding img{max-height:26px;height:26px}.navbar>nav{font-size:14px}#header{background:#f9f9f9}#mainContent{margin-right:330px}#sideBar{position:absolute;width:300px;border-left:1px solid #ccc;border-top-width:0;overflow:hidden;padding:0 8px 20px 30px;top:170px;right:0}.forFlow{margin:20px 50px 0 50px}#footer{text-align:center;margin-top:30px;margin-right:300px;color:#666}#blogTitle{padding:16px}#blogTitle .title{font-size:17pt}#blogTitle .subtitle{font-size:10.5pt;color:#999}#navigator{background:#f6f6f6;border-top:1px solid #ccc;border-bottom:1px solid #ccc;border-width:1px;height:30px;line-height:30px;color:#999;padding-left:15px;padding-right:5px;padding-top:2px\9}.blogStats{float:right;color:#999}#navList li{float:left;margin-right:20px;font-size:10.5pt}#sideBar li{margin-left:0;margin-bottom:0}#sideBar h3{margin:16px 0 5px 0;font-size:14px;text-align:left}#calendar{margin-top:16px;text-align:center}#calendar table{width:90%;margin:0 auto}#calendar .CalOtherMonthDay{color:#999}.ing_title a:link,.ing_title a:visited,.ing_title a:hover,.ing_title a:active{font-weight:bold}.dayTitle a:link,.dayTitle a:active,.dayTitle a:visited{color:#666}.postTitle{border-bottom:1px solid #ddd;font-size:14px;font-weight:bold;margin:20px 0 10px}.postBody{color:#111;font-size:13px;line-height:1.8}.postBody a{text-decoration:underline;color:#06c}.postCon a:hover,.postBody a:hover,.feedbackCon a:hover{border-color:#999}.postDesc{border-bottom:0 dotted #999;color:#666;text-align:right;padding-bottom:5px;vertical-align:middle}.postDesc a:link,.postDesc a:active,.postDesc a:visited{color:#666;text-decoration:none}.postDesc a:hover{text-decoration:underline}.btn_my_zzk{border:0}#sideBarMain{padding-left:0}#digg_block a:link,#digg_block a:visited,#digg_block a:active{color:#015fb6}span.diggnum{color:#015fb6}span.burynum{color:#015fb6}.newsItem p a:link,.newsItem p a:visited{color:#06c}.newsItem p a:hover,.newsItem p a:active{color:#f00}#nav_next_page a:link,#nav_next_page a:active,#nav_next_page a:visited{color:#06c}h1.postTitle a{line-height:1.5}.cal-today{border:1px solid #2649db;border-radius:3px}@media only screen and (max-width:767px){.postTitle{margin-top:30px}}</style>
+<style>.hljs{background:#f5f5f5;font-family:"Courier New",sans-serif;font-size:12px;border:1px solid #ccc;border-radius:3px}.hljs-comment,.hljs-variable{color:#008000}.hljs-keyword,.hljs-name,.hljs-tag{color:#00f}.hljs-string,.hljs-title,.hljs-attribute,.hljs-literal,.hljs-type{color:#a31515}.hljs-meta{color:#2b91af}.hljs-attr{color:#f00}</style>
+<style media="only screen and (max-width: 767px)">body{font-size:14px!important;-webkit-text-size-adjust:none}.bannerbar-text-mobile a:link,.bannerbar-text-mobile a:hover,.bannerbar-text-mobile a:active,.bannerbar-text-mobile a:visited,.imagebar-text-mobile a:link,.imagebar-text-mobile a:hover,.imagebar-text-mobile a:active,.imagebar-text-mobile a:visited{color:#369;font-size:14px;text-decoration:none}.bannerbar-text-mobile a:hover,.imagebar-text-mobile a:hover{text-decoration:underline}.forpc{display:none!important}#blog_nav_rss{display:none!important}#blog_nav_newpost{display:none!important}#green_channel{width:100%}#sidebar_search_box input[type="text"]{width:260px}#cnblogs_post_body table{display:block;overflow-x:scroll;-webkit-overflow-scrolling:regular;max-height:800px}#cnblogs_post_body table::-webkit-scrollbar:horizontal{height:12px}#cnblogs_post_body table::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);border-radius:10px;background-color:#f5f5f5}#cnblogs_post_body table::-webkit-scrollbar{width:12px;background-color:#f5f5f5}#cnblogs_post_body table::-webkit-scrollbar-thumb{border-radius:10px;-webkit-box-shadow:inset 0 0 6px rgba(0,0,0,.3);background-color:#555}#blog_c1{text-align:center;margin:10px auto 0 auto}#blog_c1{width:300px}.commentform{margin-left:10px}.cnblogs-markdown :not(pre,div,td)>code,.blogpost-body :not(pre,div,td)>code{white-space:pre-wrap}.blogpost-body,.blogpost-body p{font-size:14px}body{font-family:"HanHei SC","PingFang SC","Helvetica Neue","Helvetica","STHeitiSC-Light","Arial",sans-serif}.forFlow{margin:0 10px}#mainContent{margin-right:0}#sideBar{width:auto;position:static}</style>
+<link type=application/rss+xml rel=alternate href=https://www.cnblogs.com/zhyjava/rss>
+<link type=application/rsd+xml rel=EditURI href=https://www.cnblogs.com/zhyjava/rsd.xml>
+<link type=application/wlwmanifest+xml rel=wlwmanifest href=https://www.cnblogs.com/zhyjava/wlwmanifest.xml>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://www.cnblogs.com/zhyjava/articles/18784642","headline":"Java Web开发技术解析：从基础到实践的全栈指南","description":"Java Web开发技术解析：从基础到实践的全栈指南 在互联网技术演进中，Java Web凭借其跨平台特性、成熟的生态系统和强大的企业级服务能力，成为构建动态Web应用的核心技术栈。本文从技术组成、开发工具、实战应用三个维度，全面解析Java Web的完整技术体系，并结合最新行业实践探讨其演进方向。","image":[],"author":{"@type":"Person","@id":"https://www.cnblogs.com/zhyjava/","name":"以恒1","url":"https://www.cnblogs.com/zhyjava/"},"publisher":{"@type":"Organization","@id":"https://www.cnblogs.com/","name":"博客园","url":"https://www.cnblogs.com/"},"datePublished":"2025-03-21T10:18:00.0000000&#x2B;08:00","dateModified":"2025-03-21T10:18:00.0000000&#x2B;08:00","wordCount":"19046","isPartOf":{"@type":"Blog","@id":"https://www.cnblogs.com/zhyjava/","name":"zhyjava","publisher":{"@type":"Organization","@id":"https://www.cnblogs.com/","name":"博客园"}}}</script>
+<meta name=referrer content=no-referrer><link rel=icon id=favicon href="data:image/x-icon;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4tBYi8a8UWfOxFY/zsBS78rAV3PKwFe/ysBb58rAV/vKwFf7ysBb58rAV7/KwFdzxsBS787EVj/GvFFn4tBYiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" type=image/x-icon><style>.sf-hidden{display:none!important}</style><meta http-equiv=content-security-policy content="default-src 'none'; font-src 'self' data:; img-src 'self' data:; style-src 'unsafe-inline'; media-src 'self' data:; script-src 'unsafe-inline' data:; object-src 'self' data:; frame-src 'self' data:;"><style>img[src="data:,"],source[src="data:,"]{display:none!important}</style></head>
+<body class="skin-lessismoreright has-navbar hljs-engine">
+ <a name=top></a>
+ <div id=top_nav class="navbar forpc">
+ <nav id=nav_main class=navbar-main>
+ <ul id=nav_left class="navbar-list navbar-left">
+ <li class=navbar-branding>
+ <a href=https://www.cnblogs.com/ title=开发者的网上家园 role=banner>
+ <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjU1IiBpZD0ibGF5ZXJfMSIgZGF0YS1uYW1lPSJsYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMjgwIDEwMi42NiI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOnVybCgjZ3JhZGllbnQpO30uY2xzLTJ7ZmlsbDojOGRjZWZjO30uY2xzLTMsLmNscy00e2ZpbGw6bm9uZTtzdHJva2UtbWl0ZXJsaW1pdDoxMDtzdHJva2Utd2lkdGg6MnB4O30uY2xzLTN7c3Ryb2tlOiM0NTdhYjU7fS5jbHMtNHtzdHJva2U6dXJsKCNncmFkaWVudF8zKTt9LmNscy01e2ZpbGw6dXJsKCNncmFkaWVudF8yKTt9LmNscy02e2ZpbGw6IzJlN2FjYzt9LmNscy03e2ZpbGw6I2UzM2UwNjt9LmNscy04e2ZpbGw6IzhjOGM4Yzt9PC9zdHlsZT48cmFkaWFsR3JhZGllbnQgaWQ9ImdyYWRpZW50IiBjeD0iNDkuMjIiIGN5PSItNjU1MC45NSIgcj0iNDQuNjIiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoMSwgMCwgMCwgLTAuMDcsIDAsIC0zNTkuNDkpIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjOGM4YzhjIi8+PHN0b3Agb2Zmc2V0PSIwLjEzIiBzdG9wLWNvbG9yPSIjOTE5MTkxIiBzdG9wLW9wYWNpdHk9IjAuOTUiLz48c3RvcCBvZmZzZXQ9IjAuMzIiIHN0b3AtY29sb3I9IiNhMGEwYTAiIHN0b3Atb3BhY2l0eT0iMC44MyIvPjxzdG9wIG9mZnNldD0iMC41NCIgc3RvcC1jb2xvcj0iI2I4YjhiOCIgc3RvcC1vcGFjaXR5PSIwLjYxIi8+PHN0b3Agb2Zmc2V0PSIwLjc4IiBzdG9wLWNvbG9yPSIjZGFkYWRhIiBzdG9wLW9wYWNpdHk9IjAuMzIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkaWVudF8zIiBjeD0iLTE0Ny41NSIgY3k9Ii0yNjIuMjciIHI9IjIzLjI2IiBncmFkaWVudFRyYW5zZm9ybT0ibWF0cml4KDAuOTUsIC0wLjMyLCAtMC4zMiwgLTAuOTUsIDEyMS41LCAtMjc1LjYzKSIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZiIvPjxzdG9wIG9mZnNldD0iMC4yMSIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIwLjk5Ii8+PHN0b3Agb2Zmc2V0PSIwLjM0IiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9IjAuOTYiLz48c3RvcCBvZmZzZXQ9IjAuNDYiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMC45Ii8+PHN0b3Agb2Zmc2V0PSIwLjU2IiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9IjAuODEiLz48c3RvcCBvZmZzZXQ9IjAuNjYiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMC43MSIvPjxzdG9wIG9mZnNldD0iMC43NCIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIwLjU4Ii8+PHN0b3Agb2Zmc2V0PSIwLjgzIiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9IjAuNDIiLz48c3RvcCBvZmZzZXQ9IjAuOTEiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMC4yNCIvPjxzdG9wIG9mZnNldD0iMC45OSIgc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIwLjA0Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PjxyYWRpYWxHcmFkaWVudCBpZD0iZ3JhZGllbnRfMiIgY3g9IjYxLjE5IiBjeT0iNTcuOTMiIHI9IjU0LjU2IiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjN2FhY2RmIi8+PHN0b3Agb2Zmc2V0PSIwLjI3IiBzdG9wLWNvbG9yPSIjNzBhNmRkIi8+PHN0b3Agb2Zmc2V0PSIwLjczIiBzdG9wLWNvbG9yPSIjNTQ5NmQ5Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNDA4YmQ2Ii8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PHRpdGxlPuWNmuWuouWbrWxvZ288L3RpdGxlPjxnIGlkPSJsYXllcl8yIiBkYXRhLW5hbWU9ImxheWVyIDIiPjxnIGlkPSJsYXllcl8xLTIiIGRhdGEtbmFtZT0ibGF5ZXIgMS0yIj48ZWxsaXBzZSBjbGFzcz0iY2xzLTEiIGN4PSI0OS4yMiIgY3k9Ijk5LjQ0IiByeD0iNDQuNjIiIHJ5PSIzLjIyIi8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNNDkuMjIsMUE0OC4yMiw0OC4yMiwwLDEsMCw5Ny40NCw0OS4yMiw0OC4yMiw0OC4yMiwwLDAsMCw0OS4yMiwxWk0zNCw3Ny4wNkExMC40NiwxMC40NiwwLDEsMSw0NC40Myw2Ni42LDEwLjQ2LDEwLjQ2LDAsMCwxLDM0LDc3LjA2Wm0yNS4xMS00YTYuNSw2LjUsMCwwLDEtNi41LTYuNWMwLTkuODEtOC41MS0xOC4xLTE4LjU4LTE4LjFhNi41LDYuNSwwLDAsMSwwLTEzYzE3LjEyLDAsMzEuNTgsMTQuMjQsMzEuNTgsMzEuMUE2LjUsNi41LDAsMCwxLDU5LjA4LDczLjFaTTc5LjcyLDY3bC0uNTYsMGE2LjUsNi41LDAsMCwxLTYuNDctNkM3MS4zNSw0NS4yOSw1OS41NywyOC41LDQwLjQsMjguNWE2LjUsNi41LDAsMCwxLDAtMTNDNjQsMTUuNSw4My40OCwzNC42Myw4NS42NSw2MEE2LjUxLDYuNTEsMCwwLDEsNzkuNzIsNjdaIi8+PGNpcmNsZSBjbGFzcz0iY2xzLTMiIGN4PSI0OS4yMiIgY3k9IjQ5LjIyIiByPSI0OC4yMiIvPjxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTM1LjIsNS44OWMyMy44OC03Ljc4LDUwLDUuMzYsNTcuNDEsMjkuMDUiLz48cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik00OS4yMiw0LjZBNDQuNjIsNDQuNjIsMCwxLDAsOTMuODQsNDkuMjIsNDQuNjIsNDQuNjIsMCwwLDAsNDkuMjIsNC42Wk0zNCw3Ny4wNkExMC40NiwxMC40NiwwLDEsMSw0NC40Myw2Ni42LDEwLjQ2LDEwLjQ2LDAsMCwxLDM0LDc3LjA2Wm0yNS4xMS00YTYuNSw2LjUsMCwwLDEtNi41LTYuNWMwLTkuODEtOC41MS0xOC4xLTE4LjU4LTE4LjFhNi41LDYuNSwwLDAsMSwwLTEzYzE3LjEyLDAsMzEuNTgsMTQuMjQsMzEuNTgsMzEuMUE2LjUsNi41LDAsMCwxLDU5LjA4LDczLjFaTTc5LjcyLDY3bC0uNTYsMGE2LjUsNi41LDAsMCwxLTYuNDctNkM3MS4zNSw0NS4yOSw1OS41NywyOC41LDQwLjQsMjguNWE2LjUsNi41LDAsMCwxLDAtMTNDNjQsMTUuNSw4My40OCwzNC42Myw4NS42NSw2MEE2LjUxLDYuNTEsMCwwLDEsNzkuNzIsNjdaIi8+PHBhdGggY2xhc3M9ImNscy02IiBkPSJNNzkuNzIsNjdsLS41NiwwYTYuNSw2LjUsMCwwLDEtNi40Ny02LDM5LjI0LDM5LjI0LDAsMCwwLTQuNDUtMTUsNTYuNjQsNTYuNjQsMCwwLDAtMzctMTMuNThBNTcsNTcsMCwwLDAsNS45MywzOC4zOSw0NC42MSw0NC42MSwwLDAsMCw4NS42Miw3NWE1MS40LDUxLjQsMCwwLDAtMi44Ni05QTYuNTUsNi41NSwwLDAsMSw3OS43Miw2N1pNMzQsNzcuMDZBMTAuNDYsMTAuNDYsMCwxLDEsNDQuNDMsNjYuNiwxMC40NiwxMC40NiwwLDAsMSwzNCw3Ny4wNlptMjUuMTEtNGE2LjUsNi41LDAsMCwxLTYuNS02LjVjMC05LjgxLTguNTEtMTguMS0xOC41OC0xOC4xYTYuNSw2LjUsMCwwLDEsMC0xM2MxNy4xMiwwLDMxLjU4LDE0LjI0LDMxLjU4LDMxLjFBNi41LDYuNSwwLDAsMSw1OS4wOCw3My4xWiIvPjxwYXRoIGNsYXNzPSJjbHMtNyIgZD0iTTExNS4wOCwyNC44OFYxMC4yNGg0LjI2VjI0Ljg4aDYuMDZ2NC4yaC02LjA2djM2aC00LjI2di0zNkgxMDguNnYtNC4yWk0xNTAuODQsNDcuOHYtM0gxNTV2M2g3Ljg2djMuODRIMTU1VjYwLjRjMCwzLjEyLTEuNTYsNC42OC00LjYyLDQuNjhoLTYuNmwtLjktNGMyLjEuMTgsNC4xNC4zLDYuMDYuMywxLjIsMCwxLjg2LS42NiwxLjg2LTJWNTEuNjRoLTI2VjQ3LjhabS05LTMzLjM2VjEwLjNIMTQ2djQuMTRoN2EzNC4wOCwzNC4wOCwwLDAsMC0xLjc0LTMuNmwzLjcyLS42YTM5LjE5LDM5LjE5LDAsMCwxLDEuNTYsNC4yaDUuMTZWMTguMUgxNDZ2NC4xNGgxMy42VjQ0aC00VjM5LjgySDE0NlY0My42aC00LjE0VjM5LjgySDEzMi4zVjQ0aC00VjIyLjI0aDEzLjU2VjE4LjFIMTI2LjE4VjE0LjQ0Wk0xNDIsNTkuMzhsLTIuNywyLjdBNTYuNjEsNTYuNjEsMCwwLDAsMTMxLDU0LjM0bDIuNjQtMi41MkE1OC41Miw1OC41MiwwLDAsMSwxNDIsNTkuMzhabS0uMTItMjkuNThWMjUuNkgxMzIuM3Y0LjJabTAsNy4wOFYzMi44SDEzMi4zdjQuMDhaTTE0NiwyOS44aDkuNlYyNS42SDE0NlptMCw3LjA4aDkuNlYzMi44SDE0NloiLz48cGF0aCBjbGFzcz0iY2xzLTciIGQ9Ik0xOTIuMDYsMjAuNjhjLS45LDEuMzgtMS44LDIuNy0yLjc2LDRoMjIuMTR2My40OGEzMi43MywzMi43MywwLDAsMS0xMC42Miw5LjA2LDc0Ljc1LDc0Ljc1LDAsMCwwLDIyLDQuNzRsLTEsMy45YTcwLDcwLDAsMCwxLTI1LjUtNi40MmMtNy4wOCwzLjI0LTE2LDUuNzYtMjYuODIsNy42MmwtMS42Mi0zLjg0YzkuNjYtMS41NiwxNy43LTMuNTQsMjQuMDYtNi4wNkE1NC45Myw1NC45MywwLDAsMSwxODMuNDgsMzFhNTcuMiw1Ny4yLDAsMCwxLTcuNSw1LjY0bC0yLjc2LTMuMzZhNDQuNTIsNDQuNTIsMCwwLDAsMTQuNjQtMTMuNVpNMjE5Ljc4LDI2SDIxNS40VjE4LjUyaC00MFYyNkgxNzFWMTQuNjJoMjJhMzkuMTUsMzkuMTUsMCwwLDAtMi4yMi00LjJsNC43NC0uNzJjLjcyLDEuNDQsMS4zOCwzLjEyLDIuMSw0LjkyaDIyLjE0Wm0tNi43MiwzOS4zNmgtNC4yVjYyLjc0aC0yNS44djIuNThoLTQuMlY0Ni41NGgzNC4yWm0tNC4yLTYuNDh2LTguNGgtMjUuOHY4LjRaTTIwNi4yOCwyOC4zaC0yMC4xbC0uMTguMThhNTMuNiw1My42LDAsMCwwLDEwLjM4LDYuNzJBMzYsMzYsMCwwLDAsMjA2LjI4LDI4LjNaIi8+PHBhdGggY2xhc3M9ImNscy03IiBkPSJNMjgwLDY1LjE0aC00LjMydi0yLjRIMjM1LjJ2Mi40aC00LjMyVjEyLjgySDI4MFptLTQuMzItNi4yNFYxNi43OEgyMzUuMlY1OC45Wm0tNC4yLTI2LjM0VjM2LjRoLTkuNlY0OC43YzAsMS40NC42LDIuMTYsMS45MiwyLjE2SDI2NmEzLjA1LDMuMDUsMCwwLDAsMS45Mi0uNTRjLjcyLS40MiwxLjE0LTIuNTIsMS4zOC02LjI0bDMuNiwxLjJjLS40OCw0LjQ0LTEuMDgsNy4xNC0xLjkyLDhzLTIuMTYsMS4wOC00LjE0LDEuMTRIMjYyLjVhNC40Niw0LjQ2LDAsMCwxLTMuNDItMS4zMiw1LDUsMCwwLDEtMS4yLTMuNDhWMzYuNGgtNS43Yy0uNTQsNC45Mi0xLjY4LDguNy0zLjQ4LDExLjQ2LTIsMy4xMi01LjIyLDUuNTItOS40Miw3LjMybC0yLTMuNDhhMTYuNDksMTYuNDksMCwwLDAsOC4xNi02LjEyLDIyLjQzLDIyLjQzLDAsMCwwLDIuODgtOS4xOEgyMzkuNFYzMi41NlptLTMuNC0xMC4yNnYzLjg0SDI0Mi44MlYyMi4zWiIvPjxwYXRoIGNsYXNzPSJjbHMtOCIgZD0iTTEyMy4zNyw3OWE2LjE4LDYuMTgsMCwwLDEsNS4zMSwyLjUybC0xLjUsMS4zOGE0LjMyLDQuMzIsMCwwLDAtMy42OS0xLjljLTMuMDksMC01LDIuMzctNSw1LjU4czEuOTIsNS42MSw1LDUuNjFhNC4zNyw0LjM3LDAsMCwwLDMuNjktMS44OWwxLjUsMS4zOGE2LjE4LDYuMTgsMCwwLDEtNS4zMSwyLjUyYy00LjMyLDAtNy4yMy0zLjMtNy4yMy03LjYyUzExOS4wNSw3OSwxMjMuMzcsNzlaIi8+PHBhdGggY2xhc3M9ImNscy04IiBkPSJNMTQxLjYxLDg0LjM2YzAtMi41NS0xLjI5LTMuMzYtMy4yNC0zLjM2YTUuNTksNS41OSwwLDAsMC00LjI5LDIuMjVWOTMuODRoLTIuMjVWNzkuMzVoMi4yNXYyLjFBNy4yMiw3LjIyLDAsMCwxLDEzOS4yNCw3OWMzLDAsNC42MiwxLjUzLDQuNjIsNC42OFY5My44NGgtMi4yNVoiLz48cGF0aCBjbGFzcz0iY2xzLTgiIGQ9Ik0xNDguMzYsNzMuODNoMi4yNXY3LjcxQTYsNiwwLDAsMSwxNTUuNSw3OWMzLjc4LDAsNi40NSwzLDYuNDUsNy42MnMtMi42Nyw3LjU5LTYuNDUsNy41OWE2LjExLDYuMTEsMCwwLDEtNC44OS0yLjUydjIuMTZoLTIuMjVabTYuNTcsMTguMzZjMi45NCwwLDQuNjgtMi4zNyw0LjY4LTUuNThTMTU3Ljg3LDgxLDE1NC45Myw4MWE1LjM5LDUuMzksMCwwLDAtNC4zMiwyLjM0djYuNTdhNS4zNiw1LjM2LDAsMCwwLDQuMzIsMi4yOFoiLz48cGF0aCBjbGFzcz0iY2xzLTgiIGQ9Ik0xNjUuNjEsNzMuODNoMi4yNXYyMGgtMi4yNVoiLz48cGF0aCBjbGFzcz0iY2xzLTgiIGQ9Ik0xNzEuNTIsODYuNThjMC00LjIsMi43Ni03LjU5LDcuMTctNy41OXM3LjE3LDMuMzksNy4xNyw3LjU5LTIuNzYsNy42Mi03LjE3LDcuNjJTMTcxLjUyLDkwLjc4LDE3MS41Miw4Ni41OFptMTIsMGMwLTIuOTQtMS43MS01LjU4LTQuOC01LjU4cy00LjgzLDIuNjQtNC44Myw1LjU4LDEuNzQsNS42MSw0LjgzLDUuNjEsNC43Ny0yLjY0LDQuNzctNS42MVoiLz48cGF0aCBjbGFzcz0iY2xzLTgiIGQ9Ik0xOTAuNjMsOTUuODhhNS41Myw1LjUzLDAsMCwwLDQuNzEsMmMyLjQsMCw0LjY1LTEuMTcsNC42NS00LjM1VjkxLjQ0QTYuMDYsNi4wNiwwLDAsMSwxOTUuMTMsOTRjLTMuNzgsMC02LjQ1LTIuODItNi40NS03LjVzMi42NC03LjUsNi40NS03LjVBNiw2LDAsMCwxLDIwMCw4MS41NFY3OS4zNWgyLjI1VjkzLjQyYzAsNC44LTMuMzYsNi4zLTYuOSw2LjNhNy4zOSw3LjM5LDAsMCwxLTUuODUtMi4xNlpNMjAwLDgzLjM0QTUuMzQsNS4zNCwwLDAsMCwxOTUuNjcsODFjLTIuOTEsMC00LjY1LDIuMzEtNC42NSw1LjUyUzE5Mi43Niw5MiwxOTUuNjcsOTJBNS4zNiw1LjM2LDAsMCwwLDIwMCw4OS42N1oiLz48cGF0aCBjbGFzcz0iY2xzLTgiIGQ9Ik0yMDYuNjUsOTAuM2E2LjU0LDYuNTQsMCwwLDAsNC43NywyLjA3YzIuMjIsMCwzLjQyLTEsMy40Mi0yLjQsMC0xLjU5LTEuNzctMi4xLTMuNzItMi41OC0yLjQ2LS41Ny01LjI1LTEuMjMtNS4yNS00LjIzLDAtMi4yNSwxLjk1LTQuMTcsNS40LTQuMTdhNy4zNiw3LjM2LDAsMCwxLDUuMzcsMi4xbC0xLDEuNTZhNS42Miw1LjYyLDAsMCwwLTQuMzItMS44M2MtMiwwLTMuMjEuOS0zLjIxLDIuMTlzMS42NSwxLjg2LDMuNTQsMi4zMWMyLjUyLjU3LDUuNDMsMS4yOSw1LjQzLDQuNSwwLDIuNDMtMiw0LjM4LTUuNyw0LjM4YTcuNzEsNy43MSwwLDAsMS01Ljg1LTIuMjhaIi8+PHBhdGggY2xhc3M9ImNscy04IiBkPSJNMjIxLjg5LDkwLjg0YTEuNjUsMS42NSwwLDEsMS0xLjY1LDEuNjVoMEExLjY2LDEuNjYsMCwwLDEsMjIxLjg5LDkwLjg0WiIvPjxwYXRoIGNsYXNzPSJjbHMtOCIgZD0iTTIzMy43Nyw3OWE2LjE4LDYuMTgsMCwwLDEsNS4zMSwyLjUybC0xLjUsMS4zOGE0LjMyLDQuMzIsMCwwLDAtMy42OS0xLjljLTMuMDksMC01LDIuMzctNSw1LjU4czEuOTIsNS42MSw1LDUuNjFhNC4zNyw0LjM3LDAsMCwwLDMuNjktMS44OWwxLjUsMS4zOGE2LjE4LDYuMTgsMCwwLDEtNS4zMSwyLjUyYy00LjMyLDAtNy4yMy0zLjMtNy4yMy03LjYyUzIyOS40NSw3OSwyMzMuNzcsNzlaIi8+PHBhdGggY2xhc3M9ImNscy04IiBkPSJNMjQxLjM5LDg2LjU4YzAtNC4yLDIuNzYtNy41OSw3LjE3LTcuNTlzNy4xNywzLjM5LDcuMTcsNy41OVMyNTMsOTQuMiwyNDguNTYsOTQuMiwyNDEuMzksOTAuNzgsMjQxLjM5LDg2LjU4Wm0xMiwwYzAtMi45NC0xLjcxLTUuNTgtNC44LTUuNThzLTQuODMsMi42NC00LjgzLDUuNTgsMS43NCw1LjYxLDQuODMsNS42MSw0Ljc3LTIuNjQsNC43Ny01LjYxWiIvPjxwYXRoIGNsYXNzPSJjbHMtOCIgZD0iTTI3Ni44OCw4NGMwLTEuODMtLjgxLTMtMi42Ny0zYTUuMDcsNS4wNywwLDAsMC0zLjg0LDIuMjJWOTMuODRoLTIuMjVWODRjMC0xLjgzLS43OC0zLTIuNjctM2E1LjA5LDUuMDksMCwwLDAtMy44MSwyLjI1VjkzLjg0aC0yLjI1Vjc5LjM1aDIuMjV2Mi4xQTYuMjUsNi4yNSwwLDAsMSwyNjYuMzIsNzlhMy43MiwzLjcyLDAsMCwxLDMuOSwyLjcsNi4xLDYuMSwwLDAsMSw0Ljg2LTIuN2MyLjY0LDAsNC4wNSwxLjQ3LDQuMDUsNC4zOFY5My44NGgtMi4yNVoiLz48L2c+PC9nPjwvc3ZnPg==" alt=博客园logo>
+ </a>
+ </li>
+ <li><a href=https://cnblogs.vip/>会员</a></li>
+ <li><a href=https://cnblogs.vip/store>周边</a></li>
+ <li><a href=https://news.cnblogs.com/>新闻</a></li>
+ <li><a href=https://q.cnblogs.com/>博问</a></li>
+ <li><a href=https://ing.cnblogs.com/>闪存</a></li> 
+ <li><a href=https://www.cnblogs.com/cmt/p/19316348>赞助商</a></li>
+ <li><a href=https://youclaw.dev/ target=_blank>YouClaw</a></li>
+ </ul>
+ <ul id=nav_right class="navbar-list navbar-right">
+ <li>
+ <form id=zzk_search class="navbar-search dropdown" action=https://zzk.cnblogs.com/s role=search>
+ <input name=w id=zzk_search_input placeholder=代码改变世界 type=search tabindex=3 autocomplete=off value>
+ <button id=zzk_search_button>
+ <img id=search_icon class=focus-hidden src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBzdHJva2Utd2lkdGg9IjIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEgMS40NTgpIiBzdHJva2U9IiM5Nzk3OTciIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGNpcmNsZSBjeD0iNy41IiBjeT0iNy41IiByPSI3LjUiLz48cGF0aCBkPSJNMTIuNDk0IDEyLjA0OGw3Ljc3OCA3Ljc3OCIvPjwvZz48L3N2Zz4=" alt=搜索>
+ <img class="hidden focus-visible sf-hidden" src=data:, alt=搜索>
+ </button>
+ <ul id=navbar_search_options class="dropdown-menu quick-search-menu">
+ <li tabindex=0 class=active>
+ <div class=keyword-wrapper>
+ <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBzdHJva2Utd2lkdGg9IjIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEgMS40NTgpIiBzdHJva2U9IiM5Nzk3OTciIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGNpcmNsZSBjeD0iNy41IiBjeT0iNy41IiByPSI3LjUiLz48cGF0aCBkPSJNMTIuNDk0IDEyLjA0OGw3Ljc3OCA3Ljc3OCIvPjwvZz48L3N2Zz4=" alt=搜索>
+ <div class=keyword></div>
+ </div>
+ <span class=search-area>所有博客</span>
+ </li>
+ <li tabindex=1>
+ <div class=keyword-wrapper>
+ <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkiIGhlaWdodD0iMTkiIHZpZXdCb3g9IjAgMCAyMCAyMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBzdHJva2Utd2lkdGg9IjIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEgMS40NTgpIiBzdHJva2U9IiM5Nzk3OTciIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+PGNpcmNsZSBjeD0iNy41IiBjeT0iNy41IiByPSI3LjUiLz48cGF0aCBkPSJNMTIuNDk0IDEyLjA0OGw3Ljc3OCA3Ljc3OCIvPjwvZz48L3N2Zz4=" alt=搜索>
+ <div class=keyword></div>
+ </div>
+ <span class=search-area>当前博客</span>
+ </li>
+ </ul>
+ </form>
+ </li>
+ <li id=navbar_login_status class=navbar-list>
+ <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt=写随笔 title=写随笔 style=display:none>
+ 
+ </a>
+ <a id=navblog-myblog-icon class="navbar-user-info navbar-blog" href=https://www.cnblogs.com/my alt=我的博客 title=我的博客 style=display:none>
+ 
+ </a>
+ <a class="navbar-user-info navbar-message navbar-icon-wrapper" href=https://msg.cnblogs.com/ alt=短消息 title=短消息 style=display:none>
+ 
+ 
+ </a>
+ <a id=navbar_lite_mode_indicator data-current-page=blog style=display:none href=javascript:void(0) alt=简洁模式 title=简洁模式启用，您在访问他人博客时会使用简洁款皮肤展示>
+ 
+ </a>
+ <div id=user_info class="navbar-user-info dropdown" style=display:none>
+ 
+ 
+ </div>
+ <a class=navbar-anonymous href=https://account.cnblogs.com/signup style=display:inline>注册</a>
+ <a class=navbar-anonymous href=javascript:void(0) style=display:inline>登录</a>
+ </li>
+ </ul>
+ </nav>
+ </div>
+ 
+ <div id=home>
+ <div id=header>
+ <div id=blogTitle>
+ <div class=title><a id=Header1_HeaderTitle class="headermaintitle HeaderMainTitle" href=https://www.cnblogs.com/zhyjava>zhyjava</a>
+</div>
+<div class=subtitle></div>
+ </div>
+ <div id=navigator>
+ 
+<ul id=navList>
+ <li id=nav_sitehome><a id=blog_nav_sitehome class=menu href=https://www.cnblogs.com/>
+博客园</a>
+</li>
+ <li id=nav_myhome>
+<a id=blog_nav_myhome class=menu href=https://www.cnblogs.com/zhyjava/>
+首页</a>
+</li>
+ <li id=nav_newpost>
+<a id=blog_nav_newpost class=menu href="https://i.cnblogs.com/EditPosts.aspx?opt=1">
+新随笔</a>
+</li>
+ <li id=nav_contact>
+<a id=blog_nav_contact class=menu href=https://msg.cnblogs.com/send/%E4%BB%A5%E6%81%921>
+联系</a></li>
+ <li id=nav_rss>
+<a id=blog_nav_rss class=menu href=javascript:void(0) data-rss=https://www.cnblogs.com/zhyjava/rss/>
+订阅</a></li>
+ <li id=nav_admin>
+<a id=blog_nav_admin class=menu href=https://i.cnblogs.com/>
+管理</a>
+</li>
+</ul>
+ <div class=blogStats>
+ 
+<span id=stats_post_count>随笔 - 0&nbsp;</span>
+<span id=stats_article_count>文章 - 32&nbsp;</span>
+<span id=stats_comment_count>评论 - 0&nbsp;</span>
+<span id=stats_total_view_count>阅读 - 
+<span title="总阅读数: 6644">
+6644</span></span>
+ </div>
+ </div>
+ </div>
+ <div id=main>
+ <div id=mainContent>
+ <div class=forFlow>
+ <div id=post_detail>
+ <div id=topics>
+ <div class=post>
+ <h1 class=postTitle>
+ <a id=cb_post_title_url class="postTitle2 vertical-middle" href=https://www.cnblogs.com/zhyjava/articles/18784642 title="发布于 2025-03-21 10:17">
+ <span role=heading aria-level=2>Java Web开发技术解析：从基础到实践的全栈指南</span>
+ 
+</a><button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button>
+ </h1>
+ <div class=clear></div>
+ <div class=postBody>
+ <div id=cnblogs_post_description style=display:none>
+ 
+ Java Web开发技术解析：从基础到实践的全栈指南
+ </div>
+<div id=cnblogs_post_body class="blogpost-body cnblogs-markdown">
+<h3 id=java-web开发技术解析从基础到实践的全栈指南>Java Web开发技术解析：从基础到实践的全栈指南<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<p>在互联网技术演进中，<strong>Java Web</strong>凭借其跨平台特性、成熟的生态系统和强大的企业级服务能力，成为构建动态Web应用的核心技术栈。本文从技术组成、开发工具、实战应用三个维度，全面解析Java Web的完整技术体系，并结合最新行业实践探讨其演进方向。</p>
+<hr>
+<h4 id=一java-web的核心技术组成>一、Java Web的核心技术组成<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<p>Java Web开发以<strong>Servlet</strong>和<strong>JSP</strong>为基石，通过分层架构实现动态网页生成与业务逻辑处理。其核心技术组件包括：</p>
+<ol>
+<li>
+<p><strong>动态Web技术</strong></p>
+<ul>
+<li><strong>Servlet</strong>：服务器端Java程序，负责处理HTTP请求（如<code>doGet()</code>/<code>doPost()</code>方法），生命周期由容器管理，支持会话跟踪与数据库交互。</li>
+<li><strong>JSP</strong>：将Java代码嵌入HTML页面，通过标签库（如JSTL）简化动态内容生成，最终由容器编译为Servlet执行。</li>
+<li><strong>Filter</strong>：拦截请求与响应，实现权限校验、编码统一等横切关注点。</li>
+<li><strong>Listener</strong>：监听Web应用事件（如上下文初始化、会话创建），用于资源初始化与清理。</li>
+</ul>
+</li>
+<li>
+<p><strong>数据持久化技术</strong></p>
+<ul>
+<li><strong>JDBC</strong>：Java数据库连接标准接口，通过<code>Connection</code>、<code>Statement</code>等对象执行SQL语句，需手动处理事务与异常。</li>
+<li><strong>ORM框架</strong>：如Hibernate、MyBatis，通过对象关系映射实现数据库操作抽象，支持CRUD与复杂查询。</li>
+<li><strong>JPA</strong>：Java持久化API，提供ORM规范统一接口，简化实体类与数据库表映射。</li>
+</ul>
+</li>
+<li>
+<p><strong>架构设计模式</strong></p>
+<ul>
+<li><strong>MVC模式</strong>：分离模型（业务逻辑）、视图（页面展示）、控制器（请求分发），提升代码可维护性。</li>
+<li><strong>RESTful API</strong>：通过HTTP方法（GET/POST/PUT/DELETE）定义资源操作接口，成为微服务通信的事实标准。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id=二开发工具与生态体系>二、开发工具与生态体系<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<p>Java Web开发依赖完整的工具链支持，涵盖从编码到部署的全流程：</p>
+<ol>
+<li>
+<p><strong>开发环境</strong></p>
+<ul>
+<li><strong>IDE</strong>：IntelliJ IDEA、Eclipse提供智能代码提示与调试功能，支持Spring Boot热部署。</li>
+<li><strong>构建工具</strong>：Maven/Gradle管理项目依赖，自动化编译与打包流程。</li>
+<li><strong>版本控制</strong>：Git实现代码协作开发，配合GitHub/GitLab管理代码仓库。</li>
+</ul>
+</li>
+<li>
+<p><strong>服务器与容器</strong></p>
+<ul>
+<li><strong>Web服务器</strong>：Tomcat、Jetty处理静态资源与Servlet请求，支持WAR包部署。</li>
+<li><strong>应用服务器</strong>：JBoss/WildFly提供企业级服务（如分布式事务、集群支持），适用于高并发场景。</li>
+</ul>
+</li>
+<li>
+<p><strong>主流框架</strong></p>
+<ul>
+<li><strong>Spring生态</strong>：通过IoC容器、AOP编程与Spring MVC简化开发，支持声明式事务与REST API开发。</li>
+<li><strong>Struts2</strong>：基于MVC的表单验证与数据绑定框架，适合传统企业级应用。</li>
+<li><strong>Spring Boot</strong>：约定优于配置，内嵌Tomcat服务器，加速微服务开发。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id=三典型开发流程与实战案例>三、典型开发流程与实战案例<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<p>以电商系统用户下单功能为例，Java Web开发流程如下：</p>
+<ol>
+<li><strong>需求分析</strong>：定义订单创建、库存扣减、支付回调等接口。</li>
+<li><strong>编码实现</strong>
+<ul>
+<li><strong>Controller层</strong>：使用<code>@RestController</code>接收请求，调用Service层逻辑。</li>
+<li><strong>Service层</strong>：通过<code>@Transactional</code>声明事务边界，调用DAO层操作数据库。</li>
+<li><strong>DAO层</strong>：使用MyBatis的<code>&lt;insert&gt;</code>标签执行SQL语句，返回操作结果。</li>
+</ul>
+</li>
+<li><strong>部署运维</strong>：生成WAR包部署至Tomcat，通过日志监控与性能调优保障系统稳定。</li>
+</ol>
+<hr>
+<h4 id=四安全与性能优化实践>四、安全与性能优化实践<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<ol>
+<li>
+<p><strong>安全防护</strong></p>
+<ul>
+<li><strong>输入校验</strong>：使用Hibernate Validator进行参数合法性检查，防止SQL注入与XSS攻击。</li>
+<li><strong>HTTPS加密</strong>：通过SSL证书保护数据传输，配置Tomcat的<code>&lt;Connector&gt;</code>启用TLS协议。</li>
+<li><strong>权限控制</strong>：基于Spring Security实现角色权限管理，限制敏感接口访问。</li>
+</ul>
+</li>
+<li>
+<p><strong>性能优化</strong></p>
+<ul>
+<li><strong>缓存策略</strong>：使用Redis缓存高频访问数据，减少数据库查询压力。</li>
+<li><strong>连接池配置</strong>：通过HikariCP优化数据库连接复用，调整Tomcat线程池参数提升并发能力。</li>
+<li><strong>代码分层</strong>：严格分离Controller与Service逻辑，避免业务代码侵入视图层。</li>
+</ul>
+</li>
+</ol>
+<p>Java Web通过<strong>标准化分层架构</strong>（如MVC）与<strong>生态工具链</strong>（如Spring），将复杂的Web开发转化为可复用的工程化实践。其核心价值在于：</p>
+<ul>
+<li>
+<p><strong>企业级可靠性</strong>：通过事务管理、安全框架保障系统稳定性。</p>
+</li>
+<li>
+<p><strong>开发效率提升</strong>：注解驱动与代码生成工具减少重复劳动。</p>
+</li>
+<li>
+<p><strong>生态兼容性</strong>：支持从传统单体应用到现代微服务的平滑演进。</p>
+<hr>
+<h2 id=二核心技术组件深度解析实践篇>二、核心技术组件深度解析（实践篇）<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h2>
+<h3 id=21-动态web技术>2.1 动态Web技术<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<h4 id=211-servlet核心机制>2.1.1 Servlet核心机制<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-keyword>public</span> <span class=hljs-keyword>class</span> <span class="hljs-title class_">OrderServlet</span> <span class=hljs-keyword>extends</span> <span class="hljs-title class_">HttpServlet</span> {
+    <span class=hljs-keyword>private</span> <span class=hljs-type>OrderService</span> <span class=hljs-variable>service</span> <span class=hljs-operator>=</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">OrderService</span>();
+    
+    <span class=hljs-meta>@Override</span>
+    <span class=hljs-keyword>protected</span> <span class=hljs-keyword>void</span> <span class="hljs-title function_">doPost</span><span class=hljs-params>(HttpServletRequest req, HttpServletResponse resp)</span> 
+        <span class=hljs-keyword>throws</span> ServletException, IOException {
+        
+        <span class=hljs-comment>// 请求参数处理</span>
+        <span class=hljs-type>String</span> <span class=hljs-variable>productId</span> <span class=hljs-operator>=</span> req.getParameter(<span class=hljs-string>"productId"</span>);
+        <span class=hljs-type>int</span> <span class=hljs-variable>quantity</span> <span class=hljs-operator>=</span> Integer.parseInt(req.getParameter(<span class=hljs-string>"quantity"</span>));
+        
+        <span class=hljs-comment>// 业务逻辑执行</span>
+        <span class=hljs-keyword>try</span> {
+            <span class=hljs-type>Order</span> <span class=hljs-variable>order</span> <span class=hljs-operator>=</span> service.createOrder(productId, quantity);
+            
+            <span class=hljs-comment>// 响应处理</span>
+            resp.setContentType(<span class=hljs-string>"application/json"</span>);
+            resp.setCharacterEncoding(<span class=hljs-string>"UTF-8"</span>);
+            resp.getWriter().write(<span class=hljs-keyword>new</span> <span class="hljs-title class_">ObjectMapper</span>().writeValueAsString(order));
+        } <span class=hljs-keyword>catch</span> (InventoryException e) {
+            resp.sendError(HttpServletResponse.SC_CONFLICT, e.getMessage());
+        }
+    }
+}
+</code></pre>
+<p><strong>Servlet生命周期详解</strong>：</p>
+<ol>
+<li><strong>初始化阶段</strong>：Web容器加载Servlet类并调用<code>init()</code>方法，常用于资源初始化</li>
+<li><strong>服务阶段</strong>：
+<ul>
+<li>每个请求创建独立线程</li>
+<li>调用<code>service()</code>方法路由到<code>doGet()</code>/<code>doPost()</code>等具体方法</li>
+</ul>
+</li>
+<li><strong>销毁阶段</strong>：调用<code>destroy()</code>释放数据库连接等资源</li>
+</ol>
+<p><strong>请求处理核心对象</strong>：</p>
+<ul>
+<li>
+<p><strong>HttpServletRequest</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-comment>// 获取多值参数</span>
+String[] interests = request.getParameterValues(<span class=hljs-string>"interest"</span>);
+
+<span class=hljs-comment>// 读取JSON body</span>
+<span class=hljs-type>BufferedReader</span> <span class=hljs-variable>reader</span> <span class=hljs-operator>=</span> request.getReader();
+<span class=hljs-type>StringBuilder</span> <span class=hljs-variable>jsonBody</span> <span class=hljs-operator>=</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">StringBuilder</span>();
+String line;
+<span class=hljs-keyword>while</span> ((line = reader.readLine()) != <span class=hljs-literal>null</span>) {
+    jsonBody.append(line);
+}
+</code></pre>
+</li>
+<li>
+<p><strong>HttpServletResponse</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-comment>// 设置缓存控制头</span>
+response.setHeader(<span class=hljs-string>"Cache-Control"</span>, <span class=hljs-string>"no-cache, max-age=0"</span>);
+
+<span class=hljs-comment>// 发送重定向</span>
+response.sendRedirect(<span class=hljs-string>"/success.jsp"</span>);
+
+<span class=hljs-comment>// 设置Cookie</span>
+<span class=hljs-type>Cookie</span> <span class=hljs-variable>sessionCookie</span> <span class=hljs-operator>=</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">Cookie</span>(<span class=hljs-string>"JSESSIONID"</span>, sessionId);
+sessionCookie.setHttpOnly(<span class=hljs-literal>true</span>);
+response.addCookie(sessionCookie);
+</code></pre>
+</li>
+</ul>
+<h4 id=212-jsp技术演进>2.1.2 JSP技术演进<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<pre class=highlighter-hljs highlighted=true><code class="language-jsp highlighter-hljs hljs language-java">&lt;%@ page <span class=hljs-keyword>import</span>=<span class=hljs-string>"com.example.models.Product"</span> %&gt;
+&lt;%@ taglib prefix=<span class=hljs-string>"c"</span> uri=<span class=hljs-string>"http://java.sun.com/jsp/jstl/core"</span> %&gt;
+
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Product List&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;商品清单&lt;/h2&gt;
+    &lt;table border=<span class=hljs-string>"1"</span>&gt;
+        &lt;tr&gt;
+            &lt;th&gt;名称&lt;/th&gt;
+            &lt;th&gt;价格&lt;/th&gt;
+            &lt;th&gt;库存&lt;/th&gt;
+        &lt;/tr&gt;
+        &lt;c:forEach items=<span class=hljs-string>"${products}"</span> <span class=hljs-keyword>var</span>=<span class=hljs-string>"product"</span>&gt;
+            &lt;tr&gt;
+                &lt;td&gt;${product.name}&lt;/td&gt;
+                &lt;td&gt;¥&lt;fmt:formatNumber value=<span class=hljs-string>"${product.price}"</span> type=<span class=hljs-string>"currency"</span>/&gt;&lt;/td&gt;
+                &lt;td&gt;
+                    &lt;c:choose&gt;
+                        &lt;c:when test=<span class=hljs-string>"${product.stock &gt; 0}"</span>&gt;有货&lt;/c:when&gt;
+                        &lt;c:otherwise&gt;缺货&lt;/c:otherwise&gt;
+                    &lt;/c:choose&gt;
+                &lt;/td&gt;
+            &lt;/tr&gt;
+        &lt;/c:forEach&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>JSP九大内置对象</strong>：</p>
+<div class=table-wrapper><table>
+<thead>
+<tr>
+<th>对象</th>
+<th>类型</th>
+<th>作用域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>request</td>
+<td>HttpServletRequest</td>
+<td>Request</td>
+</tr>
+<tr>
+<td>response</td>
+<td>HttpServletResponse</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>session</td>
+<td>HttpSession</td>
+<td>Session</td>
+</tr>
+<tr>
+<td>application</td>
+<td>ServletContext</td>
+<td>Application</td>
+</tr>
+<tr>
+<td>out</td>
+<td>JspWriter</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>config</td>
+<td>ServletConfig</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>pageContext</td>
+<td>PageContext</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>page</td>
+<td>Object</td>
+<td>Page</td>
+</tr>
+<tr>
+<td>exception</td>
+<td>Throwable</td>
+<td>Page</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>JSP编译过程</strong>：</p>
+<ol>
+<li>翻译阶段：将JSP文件转换为Servlet.java</li>
+<li>编译阶段：使用Jasper编译器生成.class文件</li>
+<li>类加载阶段：由类加载器加载到JVM</li>
+<li>执行阶段：调用_jspService()方法处理请求</li>
+</ol>
+<h3 id=22-数据持久化方案>2.2 数据持久化方案<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<h4 id=221-jdbc高级应用>2.2.1 JDBC高级应用<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-keyword>public</span> <span class=hljs-keyword>class</span> <span class="hljs-title class_">JdbcUtil</span> {
+    <span class=hljs-keyword>private</span> <span class=hljs-keyword>static</span> DataSource dataSource;
+    
+    <span class=hljs-keyword>static</span> {
+        <span class=hljs-type>HikariConfig</span> <span class=hljs-variable>config</span> <span class=hljs-operator>=</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">HikariConfig</span>();
+        config.setJdbcUrl(<span class=hljs-string>"jdbc:mysql://localhost:3306/mydb"</span>);
+        config.setUsername(<span class=hljs-string>"root"</span>);
+        config.setPassword(<span class=hljs-string>"password"</span>);
+        config.addDataSourceProperty(<span class=hljs-string>"cachePrepStmts"</span>, <span class=hljs-string>"true"</span>);
+        config.addDataSourceProperty(<span class=hljs-string>"prepStmtCacheSize"</span>, <span class=hljs-string>"250"</span>);
+        config.addDataSourceProperty(<span class=hljs-string>"prepStmtCacheSqlLimit"</span>, <span class=hljs-string>"2048"</span>);
+        dataSource = <span class=hljs-keyword>new</span> <span class="hljs-title class_">HikariDataSource</span>(config);
+    }
+    
+    <span class=hljs-keyword>public</span> <span class=hljs-keyword>static</span> Connection <span class="hljs-title function_">getConnection</span><span class=hljs-params>()</span> <span class=hljs-keyword>throws</span> SQLException {
+        <span class=hljs-keyword>return</span> dataSource.getConnection();
+    }
+    
+    <span class=hljs-keyword>public</span> <span class=hljs-keyword>static</span> <span class=hljs-keyword>void</span> <span class="hljs-title function_">executeTransaction</span><span class=hljs-params>(Consumer&lt;Connection&gt; task)</span> {
+        <span class=hljs-keyword>try</span> (<span class=hljs-type>Connection</span> <span class=hljs-variable>conn</span> <span class=hljs-operator>=</span> getConnection()) {
+            <span class=hljs-keyword>try</span> {
+                conn.setAutoCommit(<span class=hljs-literal>false</span>);
+                task.accept(conn);
+                conn.commit();
+            } <span class=hljs-keyword>catch</span> (SQLException e) {
+                conn.rollback();
+                <span class=hljs-keyword>throw</span> e;
+            }
+        }
+    }
+}
+</code></pre>
+<h4 id=222-orm框架对比>2.2.2 ORM框架对比<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<p><strong>Hibernate核心配置</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-xml highlighter-hljs hljs"><span class=hljs-comment>&lt;!-- hibernate.cfg.xml --&gt;</span>
+<span class=hljs-tag>&lt;<span class=hljs-name>hibernate-configuration</span>&gt;</span>
+    <span class=hljs-tag>&lt;<span class=hljs-name>session-factory</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>property</span> <span class=hljs-attr>name</span>=<span class=hljs-string>"hibernate.connection.driver_class"</span>&gt;</span>com.mysql.cj.jdbc.Driver<span class=hljs-tag>&lt;/<span class=hljs-name>property</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>property</span> <span class=hljs-attr>name</span>=<span class=hljs-string>"hibernate.connection.url"</span>&gt;</span>jdbc:mysql://localhost:3306/mydb<span class=hljs-tag>&lt;/<span class=hljs-name>property</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>property</span> <span class=hljs-attr>name</span>=<span class=hljs-string>"hibernate.connection.username"</span>&gt;</span>root<span class=hljs-tag>&lt;/<span class=hljs-name>property</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>property</span> <span class=hljs-attr>name</span>=<span class=hljs-string>"hibernate.connection.password"</span>&gt;</span>password<span class=hljs-tag>&lt;/<span class=hljs-name>property</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>property</span> <span class=hljs-attr>name</span>=<span class=hljs-string>"hibernate.dialect"</span>&gt;</span>org.hibernate.dialect.MySQL8Dialect<span class=hljs-tag>&lt;/<span class=hljs-name>property</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>property</span> <span class=hljs-attr>name</span>=<span class=hljs-string>"hibernate.show_sql"</span>&gt;</span>true<span class=hljs-tag>&lt;/<span class=hljs-name>property</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>property</span> <span class=hljs-attr>name</span>=<span class=hljs-string>"hibernate.hbm2ddl.auto"</span>&gt;</span>update<span class=hljs-tag>&lt;/<span class=hljs-name>property</span>&gt;</span>
+        
+        <span class=hljs-tag>&lt;<span class=hljs-name>mapping</span> <span class=hljs-attr>class</span>=<span class=hljs-string>"com.example.models.Product"</span>/&gt;</span>
+    <span class=hljs-tag>&lt;/<span class=hljs-name>session-factory</span>&gt;</span>
+<span class=hljs-tag>&lt;/<span class=hljs-name>hibernate-configuration</span>&gt;</span>
+</code></pre>
+<p><strong>MyBatis动态SQL示例</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-xml highlighter-hljs hljs"><span class=hljs-tag>&lt;<span class=hljs-name>select</span> <span class=hljs-attr>id</span>=<span class=hljs-string>"findProducts"</span> <span class=hljs-attr>resultType</span>=<span class=hljs-string>"Product"</span>&gt;</span>
+    SELECT * FROM products
+    <span class=hljs-tag>&lt;<span class=hljs-name>where</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>if</span> <span class=hljs-attr>test</span>=<span class=hljs-string>"name != null"</span>&gt;</span>
+            AND name LIKE CONCAT('%', #{name}, '%')
+        <span class=hljs-tag>&lt;/<span class=hljs-name>if</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>if</span> <span class=hljs-attr>test</span>=<span class=hljs-string>"minPrice != null"</span>&gt;</span>
+            AND price &gt;= #{minPrice}
+        <span class=hljs-tag>&lt;/<span class=hljs-name>if</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>if</span> <span class=hljs-attr>test</span>=<span class=hljs-string>"maxPrice != null"</span>&gt;</span>
+            AND price &lt;= #{maxPrice}
+        <span class=hljs-tag>&lt;/<span class=hljs-name>if</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>if</span> <span class=hljs-attr>test</span>=<span class=hljs-string>"categoryIds != null"</span>&gt;</span>
+            AND category_id IN
+            <span class=hljs-tag>&lt;<span class=hljs-name>foreach</span> <span class=hljs-attr>item</span>=<span class=hljs-string>"id"</span> <span class=hljs-attr>collection</span>=<span class=hljs-string>"categoryIds"</span> 
+                     <span class=hljs-attr>open</span>=<span class=hljs-string>"("</span> <span class=hljs-attr>separator</span>=<span class=hljs-string>","</span> <span class=hljs-attr>close</span>=<span class=hljs-string>")"</span>&gt;</span>
+                #{id}
+            <span class=hljs-tag>&lt;/<span class=hljs-name>foreach</span>&gt;</span>
+        <span class=hljs-tag>&lt;/<span class=hljs-name>if</span>&gt;</span>
+    <span class=hljs-tag>&lt;/<span class=hljs-name>where</span>&gt;</span>
+    ORDER BY ${orderBy}
+<span class=hljs-tag>&lt;/<span class=hljs-name>select</span>&gt;</span>
+</code></pre>
+<h3 id=23-架构设计模式>2.3 架构设计模式<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<h4 id=231-mvc模式实现>2.3.1 MVC模式实现<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-comment>// Controller</span>
+<span class=hljs-meta>@WebServlet("/products")</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>class</span> <span class="hljs-title class_">ProductController</span> <span class=hljs-keyword>extends</span> <span class="hljs-title class_">HttpServlet</span> {
+    <span class=hljs-keyword>private</span> <span class=hljs-type>ProductService</span> <span class=hljs-variable>service</span> <span class=hljs-operator>=</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">ProductService</span>();
+    
+    <span class=hljs-meta>@Override</span>
+    <span class=hljs-keyword>protected</span> <span class=hljs-keyword>void</span> <span class="hljs-title function_">doGet</span><span class=hljs-params>(HttpServletRequest req, HttpServletResponse resp)</span> {
+        <span class=hljs-type>String</span> <span class=hljs-variable>action</span> <span class=hljs-operator>=</span> req.getParameter(<span class=hljs-string>"action"</span>);
+        
+        <span class=hljs-keyword>if</span> (<span class=hljs-string>"detail"</span>.equals(action)) {
+            <span class=hljs-type>Long</span> <span class=hljs-variable>id</span> <span class=hljs-operator>=</span> Long.parseLong(req.getParameter(<span class=hljs-string>"id"</span>));
+            <span class=hljs-type>Product</span> <span class=hljs-variable>product</span> <span class=hljs-operator>=</span> service.getProduct(id);
+            req.setAttribute(<span class=hljs-string>"product"</span>, product);
+            req.getRequestDispatcher(<span class=hljs-string>"/productDetail.jsp"</span>).forward(req, resp);
+        } <span class=hljs-keyword>else</span> {
+            List&lt;Product&gt; products = service.getAllProducts();
+            req.setAttribute(<span class=hljs-string>"products"</span>, products);
+            req.getRequestDispatcher(<span class=hljs-string>"/productList.jsp"</span>).forward(req, resp);
+        }
+    }
+}
+
+<span class=hljs-comment>// Service</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>class</span> <span class="hljs-title class_">ProductService</span> {
+    <span class=hljs-keyword>private</span> <span class=hljs-type>ProductDao</span> <span class=hljs-variable>dao</span> <span class=hljs-operator>=</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">ProductDao</span>();
+    
+    <span class=hljs-keyword>public</span> Product <span class="hljs-title function_">getProduct</span><span class=hljs-params>(Long id)</span> {
+        <span class=hljs-keyword>return</span> dao.findById(id);
+    }
+    
+    <span class=hljs-keyword>public</span> List&lt;Product&gt; <span class="hljs-title function_">getAllProducts</span><span class=hljs-params>()</span> {
+        <span class=hljs-keyword>return</span> dao.findAll();
+    }
+}
+
+<span class=hljs-comment>// DAO</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>class</span> <span class="hljs-title class_">ProductDao</span> {
+    <span class=hljs-keyword>public</span> Product <span class="hljs-title function_">findById</span><span class=hljs-params>(Long id)</span> {
+        <span class=hljs-comment>// JDBC或ORM实现</span>
+    }
+}
+</code></pre>
+<h4 id=232-restful-api设计规范>2.3.2 RESTful API设计规范<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<p><strong>HATEOAS示例</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-meta>@GetMapping("/{id}")</span>
+<span class=hljs-keyword>public</span> ResponseEntity&lt;Resource&lt;Product&gt;&gt; <span class="hljs-title function_">getProduct</span><span class=hljs-params>(<span class=hljs-meta>@PathVariable</span> Long id)</span> {
+    <span class=hljs-type>Product</span> <span class=hljs-variable>product</span> <span class=hljs-operator>=</span> service.findById(id);
+    
+    <span class=hljs-type>Link</span> <span class=hljs-variable>selfLink</span> <span class=hljs-operator>=</span> linkTo(methodOn(ProductController.class)
+                     .getProduct(id)).withSelfRel();
+    <span class=hljs-type>Link</span> <span class=hljs-variable>ordersLink</span> <span class=hljs-operator>=</span> linkTo(methodOn(OrderController.class)
+                     .getProductOrders(id)).withRel(<span class=hljs-string>"orders"</span>);
+    
+    Resource&lt;Product&gt; resource = <span class=hljs-keyword>new</span> <span class="hljs-title class_">Resource</span>&lt;&gt;(product);
+    resource.add(selfLink, ordersLink);
+    
+    <span class=hljs-keyword>return</span> ResponseEntity.ok(resource);
+}
+</code></pre>
+<p><strong>版本控制策略</strong>：</p>
+<ol>
+<li>
+<p>URI版本控制</p>
+<pre class=highlighter-hljs highlighted=true><code class="highlighter-hljs hljs language-bash">GET /api/v1/products/123
+</code></pre>
+</li>
+<li>
+<p>Header版本控制</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-http highlighter-hljs hljs">GET /api/products/123
+<span class=hljs-attribute>Accept</span><span class=hljs-punctuation>: </span>application/vnd.example.v1+json
+</code></pre>
+</li>
+<li>
+<p>参数版本控制</p>
+<pre class=highlighter-hljs highlighted=true><code class="highlighter-hljs hljs language-bash">GET /api/products/123?version=1
+</code></pre>
+</li>
+</ol>
+<hr>
+<h2 id=三开发工具链深度优化>三、开发工具链深度优化<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h2>
+<h3 id=31-集成开发环境>3.1 集成开发环境<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<p><strong>IntelliJ IDEA高级功能</strong>：</p>
+<ul>
+<li>
+<p><strong>数据库工具</strong>：直接执行SQL、可视化表结构</p>
+</li>
+<li>
+<p><strong>HTTP客户端</strong>：创建.http文件测试API</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-http highlighter-hljs hljs">GET http://localhost:8080/api/products
+<span class=hljs-attribute>Accept</span><span class=hljs-punctuation>: </span>application/json
+
+###
+
+POST http://localhost:8080/api/orders
+<span class=hljs-attribute>Content-Type</span><span class=hljs-punctuation>: </span>application/json
+
+{
+  "productId": 123,
+  "quantity": 2
+}
+</code></pre>
+</li>
+<li>
+<p><strong>代码检查</strong>：识别N+1查询问题、循环依赖等</p>
+</li>
+</ul>
+<p><strong>Eclipse插件体系</strong>：</p>
+<ul>
+<li>Spring Tools Suite：可视化Bean依赖关系</li>
+<li>MyBatis Editor：XML映射文件智能提示</li>
+<li>Checkstyle：代码规范检查</li>
+</ul>
+<hr>
+<h2 id=四企业级应用实战演练>四、企业级应用实战演练<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h2>
+<h3 id=41-电商订单系统设计>4.1 电商订单系统设计<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<p><strong>领域模型</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-keyword>public</span> <span class=hljs-keyword>class</span> <span class="hljs-title class_">Order</span> {
+    <span class=hljs-keyword>private</span> Long id;
+    <span class=hljs-keyword>private</span> OrderStatus status;
+    <span class=hljs-keyword>private</span> List&lt;OrderItem&gt; items;
+    <span class=hljs-keyword>private</span> BigDecimal totalAmount;
+    <span class=hljs-keyword>private</span> LocalDateTime createTime;
+    
+    <span class=hljs-keyword>public</span> <span class=hljs-keyword>void</span> <span class="hljs-title function_">addItem</span><span class=hljs-params>(Product product, <span class=hljs-type>int</span> quantity)</span> {
+        items.add(<span class=hljs-keyword>new</span> <span class="hljs-title class_">OrderItem</span>(product, quantity));
+        totalAmount = totalAmount.add(product.getPrice().multiply(<span class=hljs-keyword>new</span> <span class="hljs-title class_">BigDecimal</span>(quantity)));
+    }
+    
+    <span class=hljs-keyword>public</span> <span class=hljs-keyword>void</span> <span class="hljs-title function_">cancel</span><span class=hljs-params>()</span> {
+        <span class=hljs-keyword>if</span> (status != OrderStatus.PENDING) {
+            <span class=hljs-keyword>throw</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">IllegalStateException</span>(<span class=hljs-string>"只能取消待处理订单"</span>);
+        }
+        status = OrderStatus.CANCELLED;
+    }
+}
+
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>enum</span> <span class="hljs-title class_">OrderStatus</span> {
+    PENDING, PAID, SHIPPED, COMPLETED, CANCELLED
+}
+</code></pre>
+<p><strong>分布式事务处理</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-meta>@Transactional</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>void</span> <span class="hljs-title function_">placeOrder</span><span class=hljs-params>(OrderRequest request)</span> {
+    <span class=hljs-comment>// 扣减库存</span>
+    inventoryService.deductStock(request.getSku(), request.getQuantity());
+    
+    <span class=hljs-comment>// 创建订单</span>
+    <span class=hljs-type>Order</span> <span class=hljs-variable>order</span> <span class=hljs-operator>=</span> orderService.create(request);
+    
+    <span class=hljs-comment>// 发送领域事件</span>
+    applicationEventPublisher.publishEvent(<span class=hljs-keyword>new</span> <span class="hljs-title class_">OrderCreatedEvent</span>(order));
+}
+
+<span class=hljs-meta>@TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>void</span> <span class="hljs-title function_">handleOrderCreatedEvent</span><span class=hljs-params>(OrderCreatedEvent event)</span> {
+    paymentService.createPayment(event.getOrder());
+    notificationService.sendConfirmation(event.getOrder());
+}
+</code></pre>
+<h3 id=42-高并发场景优化>4.2 高并发场景优化<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<p><strong>缓存策略实现</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-meta>@Cacheable(value = "products", key = "#id", unless = "#result == null")</span>
+<span class=hljs-keyword>public</span> Product <span class="hljs-title function_">getProduct</span><span class=hljs-params>(Long id)</span> {
+    <span class=hljs-keyword>return</span> productDao.findById(id);
+}
+
+<span class=hljs-meta>@CacheEvict(value = "products", key = "#product.id")</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>void</span> <span class="hljs-title function_">updateProduct</span><span class=hljs-params>(Product product)</span> {
+    productDao.update(product);
+}
+
+<span class=hljs-meta>@Caching(
+    evict = {
+        @CacheEvict(value = "products", key = "#product.id"),
+        @CacheEvict(value = "productList", allEntries = true)
+    }
+)</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>void</span> <span class="hljs-title function_">updateWithCacheClear</span><span class=hljs-params>(Product product)</span> {
+    productDao.update(product);
+}
+</code></pre>
+<p><strong>数据库分库分表</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-meta>@Configuration</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>class</span> <span class="hljs-title class_">ShardingConfig</span> {
+    
+    <span class=hljs-meta>@Bean</span>
+    <span class=hljs-keyword>public</span> DataSource <span class="hljs-title function_">dataSource</span><span class=hljs-params>()</span> <span class=hljs-keyword>throws</span> SQLException {
+        Map&lt;String, DataSource&gt; dataSourceMap = <span class=hljs-keyword>new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+        dataSourceMap.put(<span class=hljs-string>"ds0"</span>, createDataSource(<span class=hljs-string>"ds0"</span>));
+        dataSourceMap.put(<span class=hljs-string>"ds1"</span>, createDataSource(<span class=hljs-string>"ds1"</span>));
+        
+        <span class=hljs-type>ShardingRuleConfiguration</span> <span class=hljs-variable>shardingRuleConfig</span> <span class=hljs-operator>=</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">ShardingRuleConfiguration</span>();
+        shardingRuleConfig.getTableRuleConfigs().add(getOrderTableRule());
+        
+        <span class=hljs-keyword>return</span> ShardingDataSourceFactory.createDataSource(
+            dataSourceMap, shardingRuleConfig, <span class=hljs-keyword>new</span> <span class="hljs-title class_">Properties</span>());
+    }
+    
+    <span class=hljs-keyword>private</span> TableRuleConfiguration <span class="hljs-title function_">getOrderTableRule</span><span class=hljs-params>()</span> {
+        <span class=hljs-type>TableRuleConfiguration</span> <span class=hljs-variable>result</span> <span class=hljs-operator>=</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">TableRuleConfiguration</span>(<span class=hljs-string>"orders"</span>, <span class=hljs-string>"ds${0..1}.orders_${0..15}"</span>);
+        result.setDatabaseShardingStrategyConfig(
+            <span class=hljs-keyword>new</span> <span class="hljs-title class_">InlineShardingStrategyConfiguration</span>(<span class=hljs-string>"user_id"</span>, <span class=hljs-string>"ds${user_id % 2}"</span>));
+        result.setTableShardingStrategyConfig(
+            <span class=hljs-keyword>new</span> <span class="hljs-title class_">StandardShardingStrategyConfiguration</span>(<span class=hljs-string>"id"</span>, <span class=hljs-keyword>new</span> <span class="hljs-title class_">ModuloShardingTableAlgorithm</span>()));
+        <span class=hljs-keyword>return</span> result;
+    }
+}
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id=五安全防护体系构建>五、安全防护体系构建<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h2>
+<h3 id=51-常见安全威胁与防御策略>5.1 常见安全威胁与防御策略<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<h4 id=511-输入验证机制>5.1.1 输入验证机制<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-comment>// Spring Validation示例</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>class</span> <span class="hljs-title class_">UserDTO</span> {
+    <span class=hljs-meta>@NotBlank(message = "用户名不能为空")</span>
+    <span class=hljs-meta>@Size(min = 4, max = 20, message = "用户名长度4-20字符")</span>
+    <span class=hljs-keyword>private</span> String username;
+
+    <span class=hljs-meta>@Email(message = "邮箱格式不合法")</span>
+    <span class=hljs-keyword>private</span> String email;
+    
+    <span class=hljs-meta>@Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$", 
+             message = "密码需包含字母和数字，长度至少8位")</span>
+    <span class=hljs-keyword>private</span> String password;
+}
+
+<span class=hljs-meta>@PostMapping("/users")</span>
+<span class=hljs-keyword>public</span> ResponseEntity&lt;?&gt; createUser(<span class=hljs-meta>@Valid</span> <span class=hljs-meta>@RequestBody</span> UserDTO userDTO) {
+    <span class=hljs-comment>// 业务逻辑处理</span>
+}
+</code></pre>
+<p><strong>防御维度</strong>：</p>
+<ul>
+<li><strong>客户端验证</strong>：HTML5表单属性（required/pattern）实现初步过滤</li>
+<li><strong>服务端验证</strong>：JSR 380规范结合Hibernate Validator</li>
+<li><strong>数据库约束</strong>：NOT NULL约束、CHECK约束、唯一索引</li>
+</ul>
+<h4 id=512-会话安全加固>5.1.2 会话安全加固<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-comment>// Spring Security配置</span>
+<span class=hljs-meta>@Configuration</span>
+<span class=hljs-meta>@EnableWebSecurity</span>
+<span class=hljs-keyword>public</span> <span class=hljs-keyword>class</span> <span class="hljs-title class_">SecurityConfig</span> {
+    
+    <span class=hljs-meta>@Bean</span>
+    <span class=hljs-keyword>public</span> SecurityFilterChain <span class="hljs-title function_">filterChain</span><span class=hljs-params>(HttpSecurity http)</span> <span class=hljs-keyword>throws</span> Exception {
+        http
+            .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .sessionFixation().migrateSession()
+                .maximumSessions(<span class=hljs-number>1</span>)
+                .expiredUrl(<span class=hljs-string>"/login?expired"</span>);
+        
+        <span class=hljs-keyword>return</span> http.build();
+    }
+}
+</code></pre>
+<p><strong>安全实践</strong>：</p>
+<ul>
+<li>会话ID随机化：使用UUID替代自增ID</li>
+<li>Cookie属性设置：HttpOnly、Secure、SameSite</li>
+<li>会话超时控制：闲置超时15分钟，绝对超时2小时</li>
+</ul>
+<h3 id=52-加密与安全传输>5.2 加密与安全传输<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<h4 id=521-https配置实践>5.2.1 HTTPS配置实践<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<p><strong>Tomcat SSL配置</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="language-xml highlighter-hljs hljs"><span class=hljs-tag>&lt;<span class=hljs-name>Connector</span> <span class=hljs-attr>port</span>=<span class=hljs-string>"8443"</span> <span class=hljs-attr>protocol</span>=<span class=hljs-string>"org.apache.coyote.http11.Http11NioProtocol"</span>
+           <span class=hljs-attr>maxThreads</span>=<span class=hljs-string>"150"</span> <span class=hljs-attr>SSLEnabled</span>=<span class=hljs-string>"true"</span>&gt;</span>
+    <span class=hljs-tag>&lt;<span class=hljs-name>SSLHostConfig</span>&gt;</span>
+        <span class=hljs-tag>&lt;<span class=hljs-name>Certificate</span> <span class=hljs-attr>certificateKeystoreFile</span>=<span class=hljs-string>"conf/keystore.jks"</span>
+                     <span class=hljs-attr>certificateKeystorePassword</span>=<span class=hljs-string>"changeit"</span>
+                     <span class=hljs-attr>type</span>=<span class=hljs-string>"RSA"</span> /&gt;</span>
+    <span class=hljs-tag>&lt;/<span class=hljs-name>SSLHostConfig</span>&gt;</span>
+<span class=hljs-tag>&lt;/<span class=hljs-name>Connector</span>&gt;</span>
+</code></pre>
+<p><strong>证书管理策略</strong>：</p>
+<ul>
+<li>使用Let's Encrypt自动续签免费证书</li>
+<li>通过Keytool生成JKS格式密钥库</li>
+<li>定期轮换密钥（每年至少一次）</li>
+</ul>
+<h4 id=522-敏感数据加密>5.2.2 敏感数据加密<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-comment>// Jasypt加密示例</span>
+<span class=hljs-meta>@Bean</span>
+<span class=hljs-keyword>public</span> PooledPBEStringEncryptor <span class="hljs-title function_">encryptor</span><span class=hljs-params>()</span> {
+    <span class=hljs-type>PooledPBEStringEncryptor</span> <span class=hljs-variable>encryptor</span> <span class=hljs-operator>=</span> <span class=hljs-keyword>new</span> <span class="hljs-title class_">PooledPBEStringEncryptor</span>();
+    encryptor.setAlgorithm(<span class=hljs-string>"PBEWithMD5AndDES"</span>);
+    encryptor.setPassword(System.getenv(<span class=hljs-string>"ENCRYPTION_PASSWORD"</span>));
+    encryptor.setPoolSize(<span class=hljs-number>4</span>);
+    <span class=hljs-keyword>return</span> encryptor;
+}
+
+<span class=hljs-comment>// 配置文件加密</span>
+spring.datasource.password=ENC(4Bv8dfFsa+0O1WqK7X9Tzg==)
+</code></pre>
+<hr>
+<h2 id=六性能优化全链路实践>六、性能优化全链路实践<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h2>
+<h3 id=61-数据库性能调优>6.1 数据库性能调优<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<h4 id=611-索引优化策略>6.1.1 索引优化策略<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<p><strong>复合索引设计原则</strong>：</p>
+<pre class=highlighter-hljs highlighted=true><code class="highlighter-hljs language-sql hljs"><span class=hljs-comment>-- 正确顺序的复合索引</span>
+<span class=hljs-keyword>CREATE</span> INDEX idx_user_org <span class=hljs-keyword>ON</span> users(organization_id, status, created_at);
+
+<span class=hljs-comment>-- 索引失效的反例</span>
+<span class=hljs-keyword>SELECT</span> <span class=hljs-operator>*</span> <span class=hljs-keyword>FROM</span> users <span class=hljs-keyword>WHERE</span> status <span class=hljs-operator>=</span> <span class=hljs-string>'ACTIVE'</span> <span class=hljs-keyword>AND</span> organization_id <span class=hljs-operator>=</span> <span class=hljs-number>123</span>;
+<span class=hljs-comment>-- 应调整字段顺序为(organization_id, status)</span>
+</code></pre>
+<p><strong>索引维护方案</strong>：</p>
+<ul>
+<li>每周分析慢查询日志（slow_query_log）</li>
+<li>使用EXPLAIN分析执行计划</li>
+<li>定期重建碎片化索引（&gt;30%碎片率）</li>
+</ul>
+<h4 id=612-查询优化技巧>6.1.2 查询优化技巧<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<pre class=highlighter-hljs highlighted=true><code class="highlighter-hljs language-sql hljs"><span class=hljs-comment>/* 分页优化方案 */</span>
+<span class=hljs-comment>-- 传统分页（深度分页性能差）</span>
+<span class=hljs-keyword>SELECT</span> <span class=hljs-operator>*</span> <span class=hljs-keyword>FROM</span> orders <span class=hljs-keyword>ORDER</span> <span class=hljs-keyword>BY</span> id LIMIT <span class=hljs-number>1000000</span>, <span class=hljs-number>20</span>;
+
+<span class=hljs-comment>-- 优化方案1：游标分页</span>
+<span class=hljs-keyword>SELECT</span> <span class=hljs-operator>*</span> <span class=hljs-keyword>FROM</span> orders <span class=hljs-keyword>WHERE</span> id <span class=hljs-operator>&gt;</span> <span class=hljs-number>1000000</span> <span class=hljs-keyword>ORDER</span> <span class=hljs-keyword>BY</span> id LIMIT <span class=hljs-number>20</span>;
+
+<span class=hljs-comment>-- 优化方案2：覆盖索引</span>
+<span class=hljs-keyword>SELECT</span> id <span class=hljs-keyword>FROM</span> orders <span class=hljs-keyword>ORDER</span> <span class=hljs-keyword>BY</span> id LIMIT <span class=hljs-number>1000000</span>, <span class=hljs-number>20</span>;
+<span class=hljs-keyword>SELECT</span> <span class=hljs-operator>*</span> <span class=hljs-keyword>FROM</span> orders <span class=hljs-keyword>WHERE</span> id <span class=hljs-keyword>IN</span> (...);
+</code></pre>
+<h3 id=62-应用层性能优化>6.2 应用层性能优化<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h3>
+<h4 id=621-并发处理模型>6.2.1 并发处理模型<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<pre class=highlighter-hljs highlighted=true><code class="language-java highlighter-hljs hljs"><span class=hljs-comment>// CompletableFuture并行处理</span>
+<span class=hljs-keyword>public</span> OrderDetail <span class="hljs-title function_">getOrderDetail</span><span class=hljs-params>(Long orderId)</span> {
+    CompletableFuture&lt;Order&gt; orderFuture = CompletableFuture
+        .supplyAsync(() -&gt; orderService.getOrder(orderId), ioExecutor);
+    
+    CompletableFuture&lt;List&lt;OrderItem&gt;&gt; itemsFuture = CompletableFuture
+        .supplyAsync(() -&gt; orderService.getItems(orderId), ioExecutor);
+    
+    CompletableFuture&lt;Payment&gt; paymentFuture = CompletableFuture
+        .supplyAsync(() -&gt; paymentService.getPayment(orderId), ioExecutor);
+
+    <span class=hljs-keyword>return</span> CompletableFuture.allOf(orderFuture, itemsFuture, paymentFuture)
+        .thenApply(v -&gt; <span class=hljs-keyword>new</span> <span class="hljs-title class_">OrderDetail</span>(
+            orderFuture.join(), 
+            itemsFuture.join(), 
+            paymentFuture.join()
+        )).join();
+}
+</code></pre>
+<p><strong>线程池配置黄金法则</strong>：</p>
+<ul>
+<li>IO密集型：线程数 = CPU核心数 * (1 + 平均等待时间/计算时间)</li>
+<li>计算密集型：线程数 = CPU核心数 + 1</li>
+<li>队列选择：SynchronousQueue（直接传递） vs LinkedBlockingQueue（缓冲队列）</li>
+</ul>
+<h4 id=622-缓存应用模式>6.2.2 缓存应用模式<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h4>
+<p><strong>多级缓存架构</strong>：</p>
+<div class=mermaid data-processed=true><svg aria-roledescription=flowchart-v2 role="graphics-document document" viewBox="0 0 1066 484" style=max-width:1066px class=flowchart xmlns:xlink=http://www.w3.org/1999/xlink xmlns=http://www.w3.org/2000/svg width=100% id=mermaid-1775218943644><style>#mermaid-1775218943644{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#333}#mermaid-1775218943644 .edge-thickness-normal{stroke-width:1px}#mermaid-1775218943644 .edge-pattern-solid{stroke-dasharray:0}#mermaid-1775218943644 .marker{fill:#333333;stroke:#333333}#mermaid-1775218943644 .marker.cross{stroke:#333333}#mermaid-1775218943644 p{margin:0}#mermaid-1775218943644 .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#333}#mermaid-1775218943644 .cluster-label span p{background-color:transparent}#mermaid-1775218943644 span{fill:#333;color:#333}#mermaid-1775218943644 .node rect,#mermaid-1775218943644 .node polygon{fill:#ECECFF;stroke:#9370DB;stroke-width:1px}#mermaid-1775218943644 .node .label{text-align:center}#mermaid-1775218943644 .flowchart-link{stroke:#333333;fill:none}#mermaid-1775218943644 .edgeLabel{background-color:rgba(232,232,232,0.8);text-align:center}#mermaid-1775218943644 .edgeLabel p{background-color:rgba(232,232,232,0.8)}#mermaid-1775218943644 .labelBkg{background-color:rgba(232,232,232,0.5)}#mermaid-1775218943644 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px}#mermaid-1775218943644 .cluster span{color:#333}</style><g><marker orient=auto markerHeight=8 markerWidth=8 markerUnits=userSpaceOnUse refY=5 refX=5 viewBox="0 0 10 10" class="marker flowchart-v2" id=mermaid-1775218943644_flowchart-v2-pointEnd><path style=stroke-width:1;stroke-dasharray:1,0 class=arrowMarkerPath d="M 0 0 L 10 5 L 0 10 z"></path></marker><marker orient=auto markerHeight=8 markerWidth=8 markerUnits=userSpaceOnUse refY=5 refX=4.5 viewBox="0 0 10 10" class="marker flowchart-v2" id=mermaid-1775218943644_flowchart-v2-pointStart><path style=stroke-width:1;stroke-dasharray:1,0 class=arrowMarkerPath d="M 0 5 L 10 10 L 10 0 z"></path></marker><marker orient=auto markerHeight=11 markerWidth=11 markerUnits=userSpaceOnUse refY=5 refX=11 viewBox="0 0 10 10" class="marker flowchart-v2" id=mermaid-1775218943644_flowchart-v2-circleEnd><circle style=stroke-width:1;stroke-dasharray:1,0 class=arrowMarkerPath r=5 cy=5 cx=5></circle></marker><marker orient=auto markerHeight=11 markerWidth=11 markerUnits=userSpaceOnUse refY=5 refX=-1 viewBox="0 0 10 10" class="marker flowchart-v2" id=mermaid-1775218943644_flowchart-v2-circleStart><circle style=stroke-width:1;stroke-dasharray:1,0 class=arrowMarkerPath r=5 cy=5 cx=5></circle></marker><marker orient=auto markerHeight=11 markerWidth=11 markerUnits=userSpaceOnUse refY=5.2 refX=12 viewBox="0 0 11 11" class="marker cross flowchart-v2" id=mermaid-1775218943644_flowchart-v2-crossEnd><path style=stroke-width:2;stroke-dasharray:1,0 class=arrowMarkerPath d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><marker orient=auto markerHeight=11 markerWidth=11 markerUnits=userSpaceOnUse refY=5.2 refX=-1 viewBox="0 0 11 11" class="marker cross flowchart-v2" id=mermaid-1775218943644_flowchart-v2-crossStart><path style=stroke-width:2;stroke-dasharray:1,0 class=arrowMarkerPath d="M 1,1 l 9,9 M 10,1 l -9,9"></path></marker><g class=root><g class=clusters><g data-look=classic id=失效策略 class=cluster><rect height=275 width=718 y=201 x=166></rect><g transform="translate(493, 201)" class=cluster-label><foreignobject height=24 width=64><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center xmlns=http://www.w3.org/1999/xhtml><span class=nodeLabel><p>失效策略</p></span></div></foreignobject></g></g></g><g class=edgePaths><path marker-end=url(#mermaid-1775218943644_flowchart-v2-pointEnd) class="edge-thickness-normal edge-pattern-solid flowchart-link" id=L_A_B_0 d=M116,320L120.167,320C124.333,320,132.667,320,141,320C149.333,320,157.667,320,165.417,320.07C173.167,320.141,180.334,320.281,183.917,320.351L187.501,320.422></path><path marker-end=url(#mermaid-1775218943644_flowchart-v2-pointEnd) class="edge-thickness-normal edge-pattern-solid flowchart-link" id=L_B_C_1 d=M285.511,296.511L297.592,288.092C309.674,279.674,333.837,262.837,359.883,241.537C385.93,220.237,413.859,194.475,427.824,181.593L441.789,168.712></path><path marker-end=url(#mermaid-1775218943644_flowchart-v2-pointEnd) class="edge-thickness-normal edge-pattern-solid flowchart-link" id=L_B_D_2 d=M305.431,316.431L314.193,315.693C322.954,314.954,340.477,313.477,356.822,312.815C373.167,312.153,388.333,312.306,395.917,312.383L403.5,312.46></path><path marker-end=url(#mermaid-1775218943644_flowchart-v2-pointEnd) class="edge-thickness-normal edge-pattern-solid flowchart-link" id=L_D_E_3 d=M520.034,291.034L535.695,283.528C551.356,276.023,582.678,261.011,621.047,223.371C659.416,185.732,704.831,125.463,727.539,95.329L750.247,65.195></path><path marker-end=url(#mermaid-1775218943644_flowchart-v2-pointEnd) class="edge-thickness-normal edge-pattern-solid flowchart-link" id=L_D_F_4 d=M532.401,303.401L546.001,301.168C559.601,298.934,586.8,294.467,621.678,272.026C656.556,249.585,699.113,209.17,720.391,188.962L741.669,168.755></path><path marker-end=url(#mermaid-1775218943644_flowchart-v2-pointEnd) class="edge-thickness-normal edge-pattern-solid flowchart-link" id=L_F_G_5 d=M843,139L849.833,139C856.667,139,870.333,139,881.333,139C892.333,139,900.667,139,908.333,139C916,139,923,139,926.5,139L930,139></path><path marker-end=url(#mermaid-1775218943644_flowchart-v2-pointEnd) class="edge-thickness-normal edge-pattern-solid flowchart-link" id=L_D_H_6 d=M532.401,321.599L546.001,323.666C559.601,325.733,586.8,329.866,615.939,337.504C645.078,345.141,676.156,356.282,691.696,361.853L707.235,367.424></path><path marker-end=url(#mermaid-1775218943644_flowchart-v2-pointEnd) class="edge-thickness-normal edge-pattern-solid flowchart-link" id=L_H_B_7 d=M711,405.818L694.833,409.681C678.667,413.545,646.333,421.273,606.833,425.136C567.333,429,520.667,429,478,429C435.333,429,396.667,429,364.78,416.33C332.893,403.659,307.786,378.318,295.233,365.648L282.679,352.977></path><path marker-end=url(#mermaid-1775218943644_flowchart-v2-pointEnd) class="edge-thickness-normal edge-pattern-solid flowchart-link" id=L_H_D_8 d=M711,385.931L694.833,384.609C678.667,383.287,646.333,380.644,615.109,372.266C583.885,363.888,553.771,349.776,538.713,342.719L523.656,335.663></path></g><g class=edgeLabels><g class=edgeLabel><g transform="translate(0, 0)" class=label><foreignobject height=0 width=0><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center class=labelBkg xmlns=http://www.w3.org/1999/xhtml><span class=edgeLabel></span></div></foreignobject></g></g><g transform="translate(358, 246)" class=edgeLabel><g transform="translate(-16, -12)" class=label><foreignobject height=24 width=32><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center class=labelBkg xmlns=http://www.w3.org/1999/xhtml><span class=edgeLabel><p>命中</p></span></div></foreignobject></g></g><g transform="translate(358, 312)" class=edgeLabel><g transform="translate(-24, -12)" class=label><foreignobject height=24 width=48><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center class=labelBkg xmlns=http://www.w3.org/1999/xhtml><span class=edgeLabel><p>未命中</p></span></div></foreignobject></g></g><g transform="translate(614, 246)" class=edgeLabel><g transform="translate(-16, -12)" class=label><foreignobject height=24 width=32><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center class=labelBkg xmlns=http://www.w3.org/1999/xhtml><span class=edgeLabel><p>命中</p></span></div></foreignobject></g></g><g transform="translate(614, 290)" class=edgeLabel><g transform="translate(-24, -12)" class=label><foreignobject height=24 width=48><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center class=labelBkg xmlns=http://www.w3.org/1999/xhtml><span class=edgeLabel><p>未命中</p></span></div></foreignobject></g></g><g class=edgeLabel><g transform="translate(0, 0)" class=label><foreignobject height=0 width=0><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center class=labelBkg xmlns=http://www.w3.org/1999/xhtml><span class=edgeLabel></span></div></foreignobject></g></g><g transform="translate(614, 334)" class=edgeLabel><g transform="translate(-48, -12)" class=label><foreignobject height=24 width=96><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center class=labelBkg xmlns=http://www.w3.org/1999/xhtml><span class=edgeLabel><p>发布变更事件</p></span></div></foreignobject></g></g><g transform="translate(474, 429)" class=edgeLabel><g transform="translate(-16, -12)" class=label><foreignobject height=24 width=32><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center class=labelBkg xmlns=http://www.w3.org/1999/xhtml><span class=edgeLabel><p>通知</p></span></div></foreignobject></g></g><g transform="translate(614, 378)" class=edgeLabel><g transform="translate(-16, -12)" class=label><foreignobject height=24 width=32><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center class=labelBkg xmlns=http://www.w3.org/1999/xhtml><span class=edgeLabel><p>通知</p></span></div></foreignobject></g></g></g><g class=nodes><g transform="translate(62, 320)" id=flowchart-A-0 class="node default"><rect height=54 width=108 y=-27 x=-54 class="basic label-container"></rect><g transform="translate(-24, -12)" class=label><rect></rect><foreignobject height=24 width=48><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center xmlns=http://www.w3.org/1999/xhtml><span class=nodeLabel><p>客户端</p></span></div></foreignobject></g></g><g transform="translate(250, 320)" id=flowchart-B-1 class="node default"><polygon transform=translate(-59,59) class=label-container points="59,0 118,-59 59,-118 0,-59"></polygon><g transform="translate(-32, -12)" class=label><rect></rect><foreignobject height=24 width=64><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center xmlns=http://www.w3.org/1999/xhtml><span class=nodeLabel><p>本地缓存</p></span></div></foreignobject></g></g><g transform="translate(474, 139)" id=flowchart-C-3 class="node default"><rect height=54 width=124 y=-27 x=-62 class="basic label-container"></rect><g transform="translate(-32, -12)" class=label><rect></rect><foreignobject height=24 width=64><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center xmlns=http://www.w3.org/1999/xhtml><span class=nodeLabel><p>返回数据</p></span></div></foreignobject></g></g><g transform="translate(474, 312)" id=flowchart-D-5 class="node default"><polygon transform=translate(-67,67) class=label-container points="67,0 134,-67 67,-134 0,-67"></polygon><g transform="translate(-40, -12)" class=label><rect></rect><foreignobject height=24 width=80><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center xmlns=http://www.w3.org/1999/xhtml><span class=nodeLabel><p>分布式缓存</p></span></div></foreignobject></g></g><g transform="translate(773, 35)" id=flowchart-E-7 class="node default"><rect height=54 width=172 y=-27 x=-86 class="basic label-container"></rect><g transform="translate(-56, -12)" class=label><rect></rect><foreignobject height=24 width=112><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center xmlns=http://www.w3.org/1999/xhtml><span class=nodeLabel><p>返回并回写本地</p></span></div></foreignobject></g></g><g transform="translate(773, 139)" id=flowchart-F-9 class="node default"><rect height=54 width=140 y=-27 x=-70 class="basic label-container"></rect><g transform="translate(-40, -12)" class=label><rect></rect><foreignobject height=24 width=80><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center xmlns=http://www.w3.org/1999/xhtml><span class=nodeLabel><p>数据库查询</p></span></div></foreignobject></g></g><g transform="translate(996, 139)" id=flowchart-G-11 class="node default"><rect height=54 width=124 y=-27 x=-62 class="basic label-container"></rect><g transform="translate(-32, -12)" class=label><rect></rect><foreignobject height=24 width=64><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center xmlns=http://www.w3.org/1999/xhtml><span class=nodeLabel><p>写入缓存</p></span></div></foreignobject></g></g><g transform="translate(773, 391)" id=flowchart-H-13 class="node default"><rect height=54 width=124 y=-27 x=-62 class="basic label-container"></rect><g transform="translate(-32, -12)" class=label><rect></rect><foreignobject height=24 width=64><div style=display:table-cell;white-space:nowrap;line-height:1.5;max-width:200px;text-align:center xmlns=http://www.w3.org/1999/xhtml><span class=nodeLabel><p>消息队列</p></span></div></foreignobject></g></g></g></g></g></svg></div><hr>
+<hr>
+<h2 id=结语java-web的技术哲学>结语：Java Web的技术哲学<button class="cnblogs-toc-button sf-hidden" title=显示目录导航 aria-expanded=false></button></h2>
+<p>Java Web技术体系通过<strong>标准化</strong>与<strong>开放性</strong>的平衡之道，在保持技术先进性的同时兼顾企业级稳定性，其核心价值体现在：</p>
+<ol>
+<li>
+<p><strong>工程化实践体系</strong></p>
+<ul>
+<li>通过Maven/Gradle实现构建标准化</li>
+<li>借助JPA规范统一持久层访问</li>
+<li>基于Servlet规范保证Web容器兼容性</li>
+</ul>
+</li>
+<li>
+<p><strong>生态协同效应</strong></p>
+<ul>
+<li>Spring生态覆盖全生命周期需求</li>
+<li>微服务架构与云原生平滑演进</li>
+<li>多语言生态互补（Kotlin/Scala）</li>
+</ul>
+</li>
+<li>
+<p><strong>持续进化能力</strong></p>
+<ul>
+<li>模块化系统（Java 9+ JPMS）</li>
+<li>协程支持（Project Loom）</li>
+<li>值类型（Valhalla项目）</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class=clear></div>
+<div id=blog_post_info_block role=contentinfo class=post-meta-container>
+<div id=EntryTag class="post-meta-item detail-post-tags">
+ 
+ <div class="post-meta-item post-meta-disclaimer">
+ 免责声明：本内容来自平台创作者，博客园系信息发布平台，仅提供信息存储空间服务。
+ </div>
+</div>
+ <div id=blog_post_info>
+<div id=green_channel>
+ <a href=javascript:void(0) id=green_channel_digg>好文要顶</a>
+ <a id=green_channel_follow href=javascript:void(0)>关注我</a>
+ <a id=green_channel_favorite href=javascript:void(0)>收藏该文</a>
+ <a id=green_channel_wechat href=javascript:void(0)>微信分享</a>
+</div>
+<div id=author_profile>
+ <div id=author_profile_info class=author_profile_info>
+ <a href=https://home.cnblogs.com/u/zhyjava/ target=_blank><img src="data:image/png;base64,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" class=author_avatar alt></a>
+ <div id=author_profile_detail class="author_profile_info post-detail-profile">
+ <a href=https://home.cnblogs.com/u/zhyjava/>以恒1</a>
+ <br>
+ <a href=https://home.cnblogs.com/u/zhyjava/followers/>粉丝 - <span class=follower-count>0</span></a>
+ <a href=https://home.cnblogs.com/u/zhyjava/followees/>关注 - <span class=following-count>0</span></a><br>
+ </div>
+ </div>
+ <div class=clear></div>
+ <div id=author_profile_honor></div>
+ <div id=author_profile_follow class=follow-tip>
+ <a href=javascript:void(0)>+加关注</a>
+ </div>
+</div>
+<div id=div_digg>
+ <div class=diggit>
+ <span class=diggnum id=digg_count>0</span>
+ </div>
+ <div class=buryit>
+ <span class=burynum id=bury_count>0</span>
+ </div>
+ <div class=clear></div>
+ <div class=diggword id=digg_tips>
+ </div>
+ <div id=vip_tip><a class=tip href=https://cnblogs.vip/ target=_blank>升级成为会员</a></div>
+</div>
+</div>
+ <div class=clear></div>
+ <div id=post_next_prev></div>
+</div>
+ </div>
+ <div class=postDesc>posted @ 
+<span id=post-date data-last-update-days=0 data-date-updated="2025-03-21 10:18">2025-03-21 10:17</span>&nbsp;
+<a href=https://www.cnblogs.com/zhyjava>以恒1</a>&nbsp;
+阅读(<span id=post_view_count>220</span>)&nbsp;
+评论(<span id=post_comment_count>0</span>)&nbsp;
+&nbsp;
+<a href=javascript:void(0)>收藏</a>&nbsp;
+<a href=javascript:void(0)>举报</a>
+</div>
+ </div>
+ 
+ <a id=!comments></a>
+<div id=blog-comments-placeholder class=sf-hidden></div>
+<div id=comment_form class=commentform>
+ <a name=commentform></a>
+ <div id=divCommentShow></div>
+ <div id=comment_nav>
+ <div class=comment-nav-right>
+ <span id=span_refresh_tips></span><a href=#>刷新页面</a><a href=#top>返回顶部</a>
+ </div>
+ </div>
+ <div id=comment_form_container><div class=login_tips>
+ 登录后才能查看或发表评论，立即 <a rel=nofollow href=javascript:void(0) class=underline>登录</a> 或者
+ <a href=https://www.cnblogs.com/>逛逛</a> 博客园首页
+</div>
+</div>
+ <div class=ad_text_commentbox id=ad_text_under_commentbox></div>
+ <div id=cnblogs_ch class=sf-hidden></div>
+ <div id=opt_under_post></div>
+ <div id=blog_c1 class="under-post-card below-post-card sf-hidden">
+ 
+ </div>
+ <div id=under_post_card1><div class="under-post-card below-post-card">
+<header>编辑推荐：</header>
+<ul>
+ <li><a href=https://www.cnblogs.com/wmyskxz/p/19754974 target=_blank>Prompt 焚诀——一个模板，终结你和 AI 的所有沟通问题</a></li>
+ <li><a href=https://www.cnblogs.com/deali/p/19780273 target=_blank>是谁 2026 年还在用 Sublime Text 写代码？</a></li>
+ <li><a href=https://www.cnblogs.com/wmyskxz/p/19732753 target=_blank>AI 会取代我们吗？—— 它不懂“孤独”是什么意思 </a></li>
+ <li><a href=https://www.cnblogs.com/wmyskxz/p/19715309 target=_blank>AI 写代码有多厉害？—— 快了 55%，但错多了 75%</a></li>
+ <li><a href=https://www.cnblogs.com/tlink/p/19683900 target=_blank>这才是未来的“openclaw”</a></li>
+</ul>
+</div></div>
+ <div id=related_posts_card></div>
+ <div id=under_post_card2></div>
+ <div id=HistoryToday class="under-post-card below-post-card sf-hidden"></div>
+ 
+</div>
+ </div>
+</div>
+ </div>
+ </div>
+ <div id=sideBar>
+ <div id=sideBarMain>
+ <div id=sidebar_news class=newsItem>
+ 
+<h3 class=catListTitle>公告</h3>
+<div id=blog-news class=sidebar-news>
+ <div id=sidebar_news_container><div id=profile_block class=sidebar-profile>
+ 昵称：
+ <a href=https://home.cnblogs.com/u/zhyjava/>
+ 以恒1
+ </a>
+ <br>
+ 园龄：
+ <a href=https://home.cnblogs.com/u/zhyjava/ title=入园时间：2025-02-10>
+ 1年1个月
+ </a>
+ <br>
+ 粉丝：
+ <a class=follower-count href=https://home.cnblogs.com/u/zhyjava/followers/>
+ 0
+ </a>
+ <br>
+ 关注：
+ <a class=folowing-count href=https://home.cnblogs.com/u/zhyjava/followees/>
+ 0
+ </a>
+ <div id=p_b_follow class=follow-tip>
+<a href=javascript:void(0)>+加关注</a></div>
+ 
+</div>
+</div>
+</div>
+</div>
+ <div id=calendar><div id=blog-calendar>
+<table id=blogCalendar class=Cal cellspacing=0 cellpadding=0 title=Calendar border=0>
+ <tbody>
+ <tr>
+ <td colspan=7>
+ <table class=CalTitle cellspacing=0 border=0>
+ <tbody>
+ <tr>
+ <td class=CalNextPrev>
+ <a href=javascript:void(0)>&lt;</a>
+ </td>
+ <td align=center>2026年4月</td>
+ <td align=right class=CalNextPrev>
+ <a href=javascript:void(0)>&gt;</a>
+ </td>
+ </tr>
+ </tbody>
+ </table>
+ </td>
+ </tr>
+ <tr>
+ <th class=CalDayHeader align=center abbr=日 scope=col>日</th>
+ <th class=CalDayHeader align=center abbr=一 scope=col>一</th>
+ <th class=CalDayHeader align=center abbr=二 scope=col>二</th>
+ <th class=CalDayHeader align=center abbr=三 scope=col>三</th>
+ <th class=CalDayHeader align=center abbr=四 scope=col>四</th>
+ <th class=CalDayHeader align=center abbr=五 scope=col>五</th>
+ <th class=CalDayHeader align=center abbr=六 scope=col>六</th>
+ </tr>
+ <tr>
+ <td class=CalOtherMonthDay align=center>29</td>
+ <td class=CalOtherMonthDay align=center>30</td>
+ <td class=CalOtherMonthDay align=center>31</td>
+ <td align=center>
+ 1
+ </td>
+ <td align=center>
+ 2
+ </td>
+ <td class="CalTodayDay cal-today" align=center>
+ 3
+ </td>
+ <td class=CalWeekendDay align=center>
+ 4
+ </td>
+ </tr>
+ <tr>
+ <td class=CalWeekendDay align=center>
+ 5
+ </td>
+ <td align=center>
+ 6
+ </td>
+ <td align=center>
+ 7
+ </td>
+ <td align=center>
+ 8
+ </td>
+ <td align=center>
+ 9
+ </td>
+ <td align=center>
+ 10
+ </td>
+ <td class=CalWeekendDay align=center>
+ 11
+ </td>
+ </tr>
+ <tr>
+ <td class=CalWeekendDay align=center>
+ 12
+ </td>
+ <td align=center>
+ 13
+ </td>
+ <td align=center>
+ 14
+ </td>
+ <td align=center>
+ 15
+ </td>
+ <td align=center>
+ 16
+ </td>
+ <td align=center>
+ 17
+ </td>
+ <td class=CalWeekendDay align=center>
+ 18
+ </td>
+ </tr>
+ <tr>
+ <td class=CalWeekendDay align=center>
+ 19
+ </td>
+ <td align=center>
+ 20
+ </td>
+ <td align=center>
+ 21
+ </td>
+ <td align=center>
+ 22
+ </td>
+ <td align=center>
+ 23
+ </td>
+ <td align=center>
+ 24
+ </td>
+ <td class=CalWeekendDay align=center>
+ 25
+ </td>
+ </tr>
+ <tr>
+ <td class=CalWeekendDay align=center>
+ 26
+ </td>
+ <td align=center>
+ 27
+ </td>
+ <td align=center>
+ 28
+ </td>
+ <td align=center>
+ 29
+ </td>
+ <td align=center>
+ 30
+ </td>
+ <td class=CalOtherMonthDay align=center>
+ 1
+ </td>
+ <td class=CalOtherMonthDay align=center>
+ 2
+ </td>
+ </tr>
+ <tr>
+ <td class=CalOtherMonthDay align=center>
+ 3
+ </td>
+ <td class=CalOtherMonthDay align=center>
+ 4
+ </td>
+ <td class=CalOtherMonthDay align=center>
+ 5
+ </td>
+ <td class=CalOtherMonthDay align=center>
+ 6
+ </td>
+ <td class=CalOtherMonthDay align=center>
+ 7
+ </td>
+ <td class=CalOtherMonthDay align=center>
+ 8
+ </td>
+ <td class=CalOtherMonthDay align=center>
+ 9
+ </td>
+ </tr>
+ </tbody>
+</table></div></div> 
+ 
+ <div id=leftcontentcontainer>
+ 
+ <div id=blog-sidecolumn><div id=sidebar_search class=sidebar-block>
+ <div class="mySearch my-search">
+ <h3 class=catListTitle>搜索</h3>
+ <div id=sidebar_search_box>
+ <div id=widget_my_zzk class=div_my_zzk>
+ <input type=text id=q class=input_my_zzk value>&nbsp;<input type=button value=找找看 id=btnZzk class=btn_my_zzk>
+ </div>
+ 
+ </div>
+ </div>
+</div>
+<div id=sidebar_shortcut class=sidebar-block>
+ 
+<h3 class=catListTitle>
+常用链接
+</h3>
+<ul>
+ <li><a href=https://www.cnblogs.com/zhyjava/p/ title=我的博客的随笔列表>我的随笔</a></li>
+<li><a href=https://www.cnblogs.com/zhyjava/MyComments.html title=我的发表过的评论列表 rel=nofollow>我的评论</a></li>
+<li><a href=https://www.cnblogs.com/zhyjava/OtherPosts.html title=我评论过的随笔列表 rel=nofollow>我的参与</a></li>
+<li><a href=https://www.cnblogs.com/zhyjava/comments title=我的博客的评论列表 rel=nofollow>最新评论</a></li>
+<li><a href=https://www.cnblogs.com/zhyjava/tag/ title=我的博客的标签列表>我的标签</a></li>
+</ul>
+</div>
+<div id=sidebar_toptags class=sidebar-block>
+ <div class=catListTag>
+ <h3 class=catListTitle><a href=https://www.cnblogs.com/zhyjava/tag/ class=sidebar-card-title-a>我的标签</a></h3>
+ <ul>
+ <li>
+ <a href=https://www.cnblogs.com/zhyjava/tag/windows/>windows<span class=tag-count>(1)</span></a>
+ </li>
+ 
+ </ul>
+</div>
+</div>
+<div id=sidebar_categories>
+</div>
+<div id=sidebar_topviewedposts class=sidebar-block>
+ 
+</div>
+<div id=sidebar_topcommentedposts class=sidebar-block>
+ 
+</div>
+<div id=sidebar_topdiggedposts class=sidebar-block>
+ 
+</div><div id=sidebar_recentcomments class=sidebar-block>
+ 
+</div></div>
+ 
+ 
+ </div>
+ </div>
+ </div>
+ <div class=clear></div>
+ </div>
+ <div class=clear></div>
+ <div id=footer>
+ 
+<a href=https://www.cnblogs.com/ id=footer_site_link class=footer-brand>博客园</a>
+<span class=footer-copyright> &nbsp;©&nbsp; 2004-2026</span>
+<br><span class=footer-icp>
+ <a target=_blank href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602011771"><img src="data:image/png;base64,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0p8zAAA7SGlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS41LWMwMjEgNzkuMTU1NzcyLCAyMDE0LzAxLzEzLTE5OjQ0OjAwICAgICAgICAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIgogICAgICAgICAgICB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIgogICAgICAgICAgICB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIj4KICAgICAgICAgPHhtcDpDcmVhdG9yVG9vbD5BZG9iZSBQaG90b3Nob3AgQ0MgMjAxNCAoV2luZG93cyk8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgICAgPHhtcDpDcmVhdGVEYXRlPjIwMTUtMTEtMTBUMTQ6MDQ6NTArMDg6MDA8L3htcDpDcmVhdGVEYXRlPgogICAgICAgICA8eG1wOk1ldGFkYXRhRGF0ZT4yMDE1LTExLTEwVDE0OjA0OjUwKzA4OjAwPC94bXA6TWV0YWRhdGFEYXRlPgogICAgICAgICA8eG1wOk1vZGlmeURhdGU+MjAxNS0xMS0xMFQxNDowNDo1MCswODowMDwveG1wOk1vZGlmeURhdGU+CiAgICAgICAgIDx4bXBNTTpJbnN0YW5jZUlEPnhtcC5paWQ6ODBiY2E5ODUtNGY5Yi02ZTRkLTlmYzktZThmNDkyNjdkZjRlPC94bXBNTTpJbnN0YW5jZUlEPgogICAgICAgICA8eG1wTU06RG9jdW1lbnRJRD5hZG9iZTpkb2NpZDpwaG90b3Nob3A6ZWRkYWU4MGMtODc3MC0xMWU1LTg0OWEtYmNmZGE2MDI4ZjJlPC94bXBNTTpEb2N1bWVudElEPgogICAgICAgICA8eG1wTU06T3JpZ2luYWxEb2N1bWVudElEPnhtcC5kaWQ6ZDAxN2I5NGUtOTRiZC0yNjQxLThmZjktYmY3YTBhMzY3N2IxPC94bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ+CiAgICAgICAgIDx4bXBNTTpIaXN0b3J5PgogICAgICAgICAgICA8cmRmOlNlcT4KICAgICAgICAgICAgICAgPHJkZjpsaSByZGY6cGFyc2VUeXBlPSJSZXNvdXJjZSI+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDphY3Rpb24+Y3JlYXRlZDwvc3RFdnQ6YWN0aW9uPgogICAgICAgICAgICAgICAgICA8c3RFdnQ6aW5zdGFuY2VJRD54bXAuaWlkOmQwMTdiOTRlLTk0YmQtMjY0MS04ZmY5LWJmN2EwYTM2NzdiMTwvc3RFdnQ6aW5zdGFuY2VJRD4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OndoZW4+MjAxNS0xMS0xMFQxNDowNDo1MCswODowMDwvc3RFdnQ6d2hlbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OnNvZnR3YXJlQWdlbnQ+QWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpPC9zdEV2dDpzb2Z0d2FyZUFnZW50PgogICAgICAgICAgICAgICA8L3JkZjpsaT4KICAgICAgICAgICAgICAgPHJkZjpsaSByZGY6cGFyc2VUeXBlPSJSZXNvdXJjZSI+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDphY3Rpb24+c2F2ZWQ8L3N0RXZ0OmFjdGlvbj4KICAgICAgICAgICAgICAgICAgPHN0RXZ0Omluc3RhbmNlSUQ+eG1wLmlpZDo4MGJjYTk4NS00ZjliLTZlNGQtOWZjOS1lOGY0OTI2N2RmNGU8L3N0RXZ0Omluc3RhbmNlSUQ+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDp3aGVuPjIwMTUtMTEtMTBUMTQ6MDQ6NTArMDg6MDA8L3N0RXZ0OndoZW4+CiAgICAgICAgICAgICAgICAgIDxzdEV2dDpzb2Z0d2FyZUFnZW50PkFkb2JlIFBob3Rvc2hvcCBDQyAyMDE0IChXaW5kb3dzKTwvc3RFdnQ6c29mdHdhcmVBZ2VudD4KICAgICAgICAgICAgICAgICAgPHN0RXZ0OmNoYW5nZWQ+Lzwvc3RFdnQ6Y2hhbmdlZD4KICAgICAgICAgICAgICAgPC9yZGY6bGk+CiAgICAgICAgICAgIDwvcmRmOlNlcT4KICAgICAgICAgPC94bXBNTTpIaXN0b3J5PgogICAgICAgICA8cGhvdG9zaG9wOkRvY3VtZW50QW5jZXN0b3JzPgogICAgICAgICAgICA8cmRmOkJhZz4KICAgICAgICAgICAgICAgPHJkZjpsaT4zQ0I4RkVFOEMyRUJFNkU1QTREQTk3MzI4MzU0MTI0RTwvcmRmOmxpPgogICAgICAgICAgICAgICA8cmRmOmxpPmFkb2JlOmRvY2lkOnBob3Rvc2hvcDpiZGRmY2Y2Zi04NzcwLTExZTUtODQ5YS1iY2ZkYTYwMjhmMmU8L3JkZjpsaT4KICAgICAgICAgICAgPC9yZGY6QmFnPgogICAgICAgICA8L3Bob3Rvc2hvcDpEb2N1bWVudEFuY2VzdG9ycz4KICAgICAgICAgPHBob3Rvc2hvcDpDb2xvck1vZGU+MzwvcGhvdG9zaG9wOkNvbG9yTW9kZT4KICAgICAgICAgPHBob3Rvc2hvcDpJQ0NQcm9maWxlPnNSR0IgSUVDNjE5NjYtMi4xPC9waG90b3Nob3A6SUNDUHJvZmlsZT4KICAgICAgICAgPGRjOmZvcm1hdD5pbWFnZS9wbmc8L2RjOmZvcm1hdD4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6WFJlc29sdXRpb24+NzIwMDAwLzEwMDAwPC90aWZmOlhSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpZUmVzb2x1dGlvbj43MjAwMDAvMTAwMDA8L3RpZmY6WVJlc29sdXRpb24+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDxleGlmOkNvbG9yU3BhY2U+MTwvZXhpZjpDb2xvclNwYWNlPgogICAgICAgICA8ZXhpZjpQaXhlbFhEaW1lbnNpb24+MjA8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+MjA8L2V4aWY6UGl4ZWxZRGltZW5zaW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/Pu6JurQAAAAgY0hSTQAAeiUAAICDAAD5/wAAgOkAAHUwAADqYAAAOpgAABdvkl/FRgAABRFJREFUeNpE1OtvW/Udx/H3ufj4+Ph2nDh2vLgrTSPaFNqGtd0Gy9LRTVymNoNM6ihCaEwdQ5sYAo0HTOwBYg/Yk0pDiG3qmLSiPtjGJERbdZSQaUArykXt1la9hDRNY6dpYsexj30uPj7ntwcVyT/w0ucrfT5fSQgBdguAEBlZhDhaiVikF2j22lfPjP77+Kc/9ZyO9p37th7s2rLlbegveZ4g6jggS4AMAKkkkhAC366DJJADgaJlgA/unTx+4qmT/7oyKpxJfdYzUDIma7M6TsXoDH+3/8jgnrG/iOC2o8JrIiQJECjpvlt0Q7JoimWEkQHN1Sf+8MbE40+O7226M/rtCYX9+k2e0me55+48XXfn1f1PvvfwiVdfOSLFlKitSbh8hq9+DitZFRlZSaHK1aJ35uV3f3+4zr79/fy42CD9pwtULwdUpwLqu//ID4JzPHPoEQ7+00dc/vM/Eoary3oCPR5dBROeRTxaH7x+9MWpkd3nRsyBPL/InmP6cAN5jUlgtcELkXpMTj19kr3GGfLfuovv7T62Z/GjN67aM2c3XHz/nVUw6jmo7ruJI5eT2idz23lwu0XzbAP5eh3JjBJdCnBP3iSyrhu96VD562nG7m8z8cUm3vwwKCSkVgx5aBWsL1aK4cfvHwilGKg2KWuOxjxEAh+WXKT1Bto2E/lGC42QyrRDX5cHkkStKRPtUQ9sHB5btwLOXHrvh+1yeTiT0KATRRQKZId7aSKw7ukm2Fck8dIQxjNbkHsMctuytOw2CEEhZ0Dp7L1Ls6d+sgIaicxgw/Lp73FB7+bEaQN1V4rqnrUEZQvpfy3sYzfxp5fRnh+m69mtvHWoBsQZ2qzSmlrALU0VV8BwaW5Po6ZyZ9Gi+HWN19+M859XSgztKJA2ktgXaoQLHu65GsnyMudfvsKrh6Lkh0w299WplD38pUvDK6CstkyrIZNavMLe+wM6fgL/6Dzdf/scuS9Cu0chzKlkdxUoTFylcvA8rbbC2GiEZHUSq6GiJuUIgAoQM746Lm+4Nhrk+3jiGxYH+np4vTyIP3uB7uokcjqGc6GGNZCjnCnwdzkGKZMnvrlAJ1nEvEPCyKw5tgKCnBMNwdyUxZ2D0/z2V9t48fkRjlqboeEzalfpMmXeOpakiQFkeO7nOjsGJpmbBFybsGNtXQFVs729k8zjz/uUFi7yy+EoY+NxJo7bXJK38MCmLyjEKnSO9NGuOazZaPDrB65x89Q1bF9Hz2qoprYRuPUcvOYnj1ZP/+6wM9/Gq/hQmmH9Q0NE8zoEVYKqSnPBIb2uC9Z2Q6nC9NuXcZJZEv0JYr0G6YF9O7XM9z+QhBAAdFr/fWzp/IHXAtdJVz6cR40LencOEiw5+HYL2dDRu+JIWoTqqSk6gUp6+3p8l2p6w8gjcTM1Lmn33TrZd2ZwFp2yOx9z9HyYzu8aIKi3CKwGGBqKZqLFoL3cpFWqoa/tRi/m8ZZt3LIlYmuaKKkUsS9rI9pXUfjohdzXkr2RTAGvHhIGKmGg4C5aIELa1TrNyUUkJQKShHujQiQmk/92IasZ1s9Ch9Uta0qKaPeOhyw7/ZpdKrU0ZZlUrkNEstEkH8VbRjgOyY1ZUgMpZK2JmtaQMr3XO+pdv1GN23+kaIus1kb4SBHVblTjTzsX8y859cUHPX9251c29WwKLSmhm3KXGkti3eB6rMe01dzI2aWphXFnpnaib2culBQFEbgA/H8ALiI3EysggNoAAAAASUVORK5CYII=">浙公网安备 33010602011771号</a>
+ <a href=https://beian.miit.gov.cn/ target=_blank>浙ICP备2021040463号-3</a>
+</span>
+ </div>
+</div>
+ 
+ 
+ 
+<div style=z-index:998;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);display:none;flex-direction:column;align-items:center;justify-content:center>
+ 
+ </div><div class=mermaidTooltip style=opacity:0></div>
